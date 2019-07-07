@@ -1,7 +1,7 @@
 {
   "name": "Pilzmaster",
   "version": "0.0.1",
-  "description": "AniPilz Currency Bot",
+  "description": "AniPilz Bot",
   "main": "bot.js",
   "author": "ScarVite#6606",
   "dependencies": {
