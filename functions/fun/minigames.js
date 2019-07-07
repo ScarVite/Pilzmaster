@@ -1,4 +1,15 @@
 module.exports = {
+  /*  reaction: function (message) {
+        var reacted = false
+        var me = 593821541934825493
+        message.channel.send("Auf die Plätze").then(function(message){
+            setTimeout(function () {message.edit("Fertig ?")  }, 5000)
+            setTimeout(function () {message.edit("LOS!")  }, 10000)
+            setTimeout(function () {message.react("🔴")  }, 10000)
+            setTimeout(function () {message.edit("STOP ")  }, 17000)
+            setTimeout(function () {}, 17000)
+             }) 
+}, */
     diceroll: function (message) {
         let dice = Math.floor(Math.random() * 6) + 1  
         switch (dice) {
@@ -36,6 +47,6 @@ module.exports = {
                 message.channel.send("Wow wie hast du das geschafft, du hast eine " + dice + ". gewürfelt, schreibe deinen erfolg Bitte ScarVite#6606 auf Discord")
                 break;
         }
-
     }
 }
+

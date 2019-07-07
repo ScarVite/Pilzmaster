@@ -33,7 +33,7 @@ bot.on('ready', function (evt) {
     console.log('Connected as: ' + bot.user.tag);
 });
 
-bot.on('message', function (message) {
+bot.on('message', function (message,reaction) {
     if (message.author.id != 593821541934825493) {
         rank.check_role(message);
     }
@@ -53,20 +53,30 @@ bot.on('message', function (message) {
         var cmd = args[0];
         args = args.splice(1);
         switch (cmd) {
-            case 'dice' :
+        /*     case 'rickroll':
+                message.react
+                break;   
+             case 'react':
+                minigames.reaction(message)
+                break; */
+             case 'dice' :
                 minigames.diceroll(message);
                 break;
             case 'meme':
                 message.channel.send("Ich Bin ncoh nicht fertig, ich brauche mehr Zeit, danke ")
                 break;
             case 'help':
-                message.reply(" sry aber bei dir kommt jede hilfe zupät")
+                message.reply(" sry aber bei dir kommt jede hilfe zuspät")
                 break;
             case 'anipilz':
                 message.channel.send("What Else?")
                 break;
             case 'test':
-                message.channel.send("Was hast du erwartet")
+                message.channel.send("Wer Findet das ").then(function(message){
+                    message.react(":FlexTape:596785751795171338")
+                    message.react(":Lucy_IDK:593426953617276958")
+                    message.pin()
+                })
                 break;
             case 'gefahr':
                 message.channel.send("https://veganheaven.de/wp-content/uploads/2018/09/Sushi-selber-machen-26-1.jpg")
