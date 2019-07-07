@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 var rank = require('./functions/moderation/check_rank.js')
+var minigames = require('./functions/fun/minigames.js')
 var auth = require('./auth/auth.json');
 var round = require('math-round');
 var restarted = false;
@@ -52,6 +53,9 @@ bot.on('message', function (message) {
         var cmd = args[0];
         args = args.splice(1);
         switch (cmd) {
+            case 'dice' :
+                minigames.diceroll(message);
+                break;
             case 'meme':
                 message.channel.send("Ich Bin ncoh nicht fertig, ich brauche mehr Zeit, danke ")
                 break;
