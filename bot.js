@@ -3,6 +3,7 @@ var rank = require('./functions/moderation/check_rank.js')
 var minigames = require('./functions/fun/minigames.js')
 var mod = require("./functions/moderation/mod.js")
 var reactions = require("./functions/administration/reactions.js")
+var core = require("./functions/administration/core.js")
 var auth = require('./auth/auth.json');
 var round = require('math-round');
 var restarted = false;
@@ -103,20 +104,10 @@ bot.on('message', function (message, reaction) {
                 message.reply('Pong! :ping_pong: (' + round(bot.ping) + 'ms) :ping_pong:')
                 break;
             case 'restart':
-                if (message.author.id == 141218912934166528 || message.author.id == 533665091468656650) {
-                    console.log(message.author.tag + ' restarted The bot')
-                    message.reply('You restarted the bot, wait a few seconds')
-                    bot.channels.get("593824605144088586").send(message.author.tag + ' restarted the bot')
-                    bot.channels.get("593824605144088586").send('---------------------------------------------------')
-                    setTimeout(function () { resetBot() }, 5000);
-                }
-                else {
-                    message.reply('I´m sorry,:no_entry_sign: you don´t have the permssion to run this command :no_entry_sign:')
-                    console.log(message.author.tag + ' tried to use -restart')
-                }
+                core.restart(message,bot)
                 break;
             case 'stop':
-                stop(message);
+                core.stop(message,bot)
                 break;
             default:
                 break;
@@ -131,24 +122,3 @@ bot.on("disconnect", function (event) {
         process.exit()
     }
 });
-
-function resetBot() {
-    restarted = true;
-    bot.channels.get("593824605144088586").send('Restarting...')
-        .then(msg => bot.destroy())
-        .then(() => bot.login(auth.token));
-}
-
-function stop(message) {
-    if (message.author.id == 141218912934166528) {
-        console.log(message.author.tag + ' Stopped The bot')
-        // message.author.send('You stopped the bot , See you soon')
-        bot.channels.get("593824605144088586").send(message.author.tag + ' stopped the bot')
-        bot.channels.get("593824605144088586").send('---------------------------------------------------')
-        setTimeout(function () { bot.destroy() }, 5000);
-    }
-    else {
-        message.reply('I´m sorry,:no_entry_sign: you don´t have the permssion to run this command :no_entry_sign:')
-        console.log(message.author.tag + ' tried to use -stop')
-    }
-}
