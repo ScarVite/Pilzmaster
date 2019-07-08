@@ -1,12 +1,14 @@
 const Discord = require('discord.js');
 var rank = require('./functions/moderation/check_rank.js')
 var minigames = require('./functions/fun/minigames.js')
+var mod = require("./functions/moderation/mod.js")
 var auth = require('./auth/auth.json');
 var round = require('math-round');
 var restarted = false;
 const prefix = "-";
 const bot = new Discord.Client();
 const avatarembed = new Discord.RichEmbed();
+const helpembed = new Discord.RichEmbed();
 bot.login(auth.token);
 
 bot.on('uncaughtException', function (exception) {
@@ -53,20 +55,24 @@ bot.on('message', function (message,reaction) {
         var cmd = args[0];
         args = args.splice(1);
         switch (cmd) {
-        /*     case 'rickroll':
-                message.react
+            case 'date':
+                const time = new Date();
+                message.reply(" Es ist:  " + time.substring(16,24))
+                break;
+             case 'rickroll':
+                //message.react
                 break;   
              case 'react':
                 minigames.reaction(message)
-                break; */
+                break; 
              case 'dice' :
                 minigames.diceroll(message);
                 break;
             case 'meme':
-                message.channel.send("Ich Bin ncoh nicht fertig, ich brauche mehr Zeit, danke ")
+                message.channel.send("Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke ")
                 break;
             case 'help':
-                message.reply(" sry aber bei dir kommt jede hilfe zuspät")
+                mod.help(message,helpneembed)
                 break;
             case 'anipilz':
                 message.channel.send("What Else?")
@@ -79,7 +85,7 @@ bot.on('message', function (message,reaction) {
                 })
                 break;
             case 'gefahr':
-                message.channel.send("https://veganheaven.de/wp-content/uploads/2018/09/Sushi-selber-machen-26-1.jpg")
+                message.channel.send("Miau")
                 break;
             case 'avatar':
                 avatarembed.setImage(message.author.avatarURL)
@@ -92,7 +98,9 @@ bot.on('message', function (message,reaction) {
             case 'restart':
                 if (message.author.id == 141218912934166528 || message.author.id == 533665091468656650) {
                     console.log(message.author.tag + ' restarted The bot')
-                    message.reply('You restarted the bot, wait a few seconds')
+                    message.reply('You restarted the bot, wait a few seconds').then(function(message){
+                        setTimeout(function(message){message.edit("Restart Sucessfull")},5000)
+                    })
                     bot.channels.get("593824605144088586").send(message.author.tag + ' restarted the bot')
                     bot.channels.get("593824605144088586").send('---------------------------------------------------')
                     setTimeout(function () { resetBot() }, 5000);

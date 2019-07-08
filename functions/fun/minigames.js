@@ -1,15 +1,15 @@
 module.exports = {
-  /*  reaction: function (message) {
+    reaction: function (message) {
         var reacted = false
         var me = 593821541934825493
         message.channel.send("Auf die Plätze").then(function(message){
             setTimeout(function () {message.edit("Fertig ?")  }, 5000)
             setTimeout(function () {message.edit("LOS!")  }, 10000)
             setTimeout(function () {message.react("🔴")  }, 10000)
-            setTimeout(function () {message.edit("STOP ")  }, 17000)
-            setTimeout(function () {}, 17000)
+            setTimeout(function () {message.edit("STOP ")  }, 11000)
+            setTimeout(function () {message.delete(1000)}, 11000)
              }) 
-}, */
+}, 
     diceroll: function (message) {
         let dice = Math.floor(Math.random() * 6) + 1  
         switch (dice) {
