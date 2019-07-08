@@ -7,11 +7,11 @@ module.exports = {
             setTimeout(function () {message.edit("LOS!")  }, 10000)
             setTimeout(function () {message.react("🔴")  }, 10000)
             setTimeout(function () {message.edit("STOP ")  }, 11000)
-            setTimeout(function () {MessageReaction.remove(593821541934825493 /* <-- my bot's id */ )}, 11000)
+            //setTimeout(function () {MessageReaction.remove(593821541934825493)}, 11000)
              }) 
-             if(message.author.id == MessageReaction.users ){
-                 message.channel.send("Good Job")
-             }
+             //if(message.author.id == MessageReaction.users ){
+              //   message.channel.send("Good Job")
+            // }
 }, 
     diceroll: function (message) {
         let dice = Math.floor(Math.random() * 6) + 1  

@@ -59,6 +59,9 @@ bot.on('message', function (message, reaction) {
             case 'recomm-react' :
                 reactions.recommendations(message)
                 break;
+            case 'remove':
+                reactions.remove(message)
+            break;
             case 'time':
                 const time = new Date();
                 message.reply(" Es ist:  " + time.getHours() + ":" + time.getMinutes() +":"+ time.getSeconds()) 

@@ -17,8 +17,7 @@ module.exports = {
             helpembed
                 .setColor('#0099ff')
                 .setTitle('User-Help')
-                .addField('Fun', '`-dice` - Throws 1 Dice randomly' +
-                    '`-react` - This will start an Game where you have to react to an message', true)
+                .addField('Fun', '`-dice` - Throws 1 Dice randomly \n `-react` - This will start an Game where you have to react to an message', true)
                 .addBlankField()
                 .addField('Informations', 'Folgt Noch', true)
                 .setAuthor('ScarVIte#6606', 'https://cdn.discordapp.com/avatars/141218912934166528/a_d468c94008ad98ef522e1c9f1ffc4bbd.gif', 'https://scarvite.6te.net')
