@@ -1,3 +1,4 @@
+// This Function is Anipilz Specific and just checks if an user has an rank he shouldn't have
 const Pfifferling = "589467467676385284"
 const Steinpilz = "589469150334812171"
 const Hutpilz = "589469259269144586"

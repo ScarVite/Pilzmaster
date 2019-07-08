@@ -8,7 +8,6 @@ var restarted = false;
 const prefix = "-";
 const bot = new Discord.Client();
 const avatarembed = new Discord.RichEmbed();
-const helpembed = new Discord.RichEmbed();
 bot.login(auth.token);
 
 bot.on('uncaughtException', function (exception) {
@@ -72,7 +71,7 @@ bot.on('message', function (message,reaction) {
                 message.channel.send("Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke ")
                 break;
             case 'help':
-                mod.help(message,helpembed)
+                mod.help(message,Discord)
                 break;
             case 'anipilz':
                 message.channel.send("What Else?")
