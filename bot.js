@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 var rank = require('./functions/moderation/check_rank.js')
 var minigames = require('./functions/fun/minigames.js')
 var mod = require("./functions/moderation/mod.js")
+var reactions = require("./functions/administration/reactions.js")
 var auth = require('./auth/auth.json');
 var round = require('math-round');
 var restarted = false;
@@ -55,6 +56,9 @@ bot.on('message', function (message, reaction) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
+            case 'recomm-react' :
+                reactions.recommendations(message)
+                break;
             case 'time':
                 const time = new Date();
                 message.reply(" Es ist:  " + time.getHours() + ":" + time.getMinutes() +":"+ time.getSeconds()) 
