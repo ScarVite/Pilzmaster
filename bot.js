@@ -59,7 +59,7 @@ bot.on('message', function (message, reaction) {
             case 'recomm-react' :
                 reactions.recommendations(message)
                 break;
-            case 'remove':
+         //   case 'remove':
                 reactions.remove(message)
             break;
             case 'time':
