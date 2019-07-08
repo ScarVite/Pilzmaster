@@ -72,12 +72,12 @@ bot.on('message', function (message,reaction) {
                 message.channel.send("Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke ")
                 break;
             case 'help':
-                mod.help(message,helpneembed)
+                mod.help(message,helpembed)
                 break;
             case 'anipilz':
                 message.channel.send("What Else?")
                 break;
-            case 'test':
+       //     case 'test':
                 message.channel.send("Wer Findet das ").then(function(message){
                     message.react(":FlexTape:596785751795171338")
                     message.react(":Lucy_IDK:593426953617276958")
@@ -98,9 +98,7 @@ bot.on('message', function (message,reaction) {
             case 'restart':
                 if (message.author.id == 141218912934166528 || message.author.id == 533665091468656650) {
                     console.log(message.author.tag + ' restarted The bot')
-                    message.reply('You restarted the bot, wait a few seconds').then(function(message){
-                        setTimeout(function(message){message.edit("Restart Sucessfull")},5000)
-                    })
+                    message.reply('You restarted the bot, wait a few seconds')
                     bot.channels.get("593824605144088586").send(message.author.tag + ' restarted the bot')
                     bot.channels.get("593824605144088586").send('---------------------------------------------------')
                     setTimeout(function () { resetBot() }, 5000);
