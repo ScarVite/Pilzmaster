@@ -34,7 +34,7 @@ bot.on('ready', function (evt) {
     console.log('Connected as: ' + bot.user.tag);
 });
 
-bot.on('message', function (message,reaction) {
+bot.on('message', function (message, reaction) {
     if (message.author.id != 593821541934825493) {
         rank.check_role(message);
     }
@@ -51,33 +51,34 @@ bot.on('message', function (message,reaction) {
     if (message.content.startsWith(prefix)) {
         var fetchedMessages = message.channel.fetchMessages({ limit: 99 });
         var args = message.content.substring(1).split(' ');
-        var cmd = args[0];
+        var precmd = args[0];
+        var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
-            case 'date':
+            case 'time':
                 const time = new Date();
-                message.reply(" Es ist:  " + time.substring(16,24))
+                message.reply(" Es ist:  " + time.getHours() + ":" + time.getMinutes() +":"+ time.getSeconds()) 
                 break;
-             case 'rickroll':
+            case 'rickroll':
                 //message.react
-                break;   
-             case 'react':
+                break;
+            case 'react':
                 minigames.reaction(message)
-                break; 
-             case 'dice' :
+                break;
+            case 'dice':
                 minigames.diceroll(message);
                 break;
             case 'meme':
                 message.channel.send("Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke ")
                 break;
             case 'help':
-                mod.help(message,Discord)
+                mod.help(message, Discord)
                 break;
             case 'anipilz':
                 message.channel.send("What Else?")
                 break;
-       //     case 'test':
-                message.channel.send("Wer Findet das ").then(function(message){
+                //     case 'test':
+                message.channel.send("Wer Findet das ").then(function (message) {
                     message.react(":FlexTape:596785751795171338")
                     message.react(":Lucy_IDK:593426953617276958")
                     message.pin()
@@ -91,7 +92,7 @@ bot.on('message', function (message,reaction) {
                 avatarembed.setFooter('The profile picture of  ' + message.author.tag)
                 message.channel.send(avatarembed)
                 break;
-                case 'ping':
+            case 'ping':
                 message.reply('Pong! :ping_pong: (' + round(bot.ping) + 'ms) :ping_pong:')
                 break;
             case 'restart':
@@ -112,7 +113,7 @@ bot.on('message', function (message,reaction) {
                 break;
             default:
                 break;
-        } 
+        }
     }
 });
 
