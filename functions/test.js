@@ -1,5 +1,6 @@
 module.exports = {
-    test: function(message){
-        message.channel.send('Erfolg')
+    test: function(message,cmd){
+        message.channel.send(message.content)
+        message.reply(cmd)
     }
 }

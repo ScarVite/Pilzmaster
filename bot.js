@@ -10,6 +10,7 @@ var mod = require("./functions/moderation/mod.js")
 var reactions = require("./functions/administration/reactions.js")
 var core = require("./functions/administration/core.js")
 var auth = require('./auth/auth.json');
+var test = require("./functions/test.js")
 var round = require('math-round');
 const prefix = "-";
 var restarted = false;
@@ -62,6 +63,9 @@ bot.on('message', function (message, reaction) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
+            case 'author':
+                message.channel.send(" hey you, yeah you, i Was Made By ScarVite#6606")
+                break;
             case 'recomm-react':
                 reactions.recommendations(message)
                 break;
@@ -93,12 +97,8 @@ bot.on('message', function (message, reaction) {
             case 'anipilz':
                 message.channel.send("What Else?")
                 break;
-                //     case 'test':
-                message.channel.send("Wer Findet das ").then(function (message) {
-                    message.react(":FlexTape:596785751795171338")
-                    message.react(":Lucy_IDK:593426953617276958")
-                    message.pin()
-                })
+                 case 'test':
+                     test.test(message,cmd)
                 break;
             case 'gefahr':
                 message.channel.send("Miau")

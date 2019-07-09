@@ -4,8 +4,8 @@ module.exports = {
         if(Perms.checkperms(message)===true){
             message.channel.fetchMessages().then(messages =>{
                 messages.tap(message =>{
-                    message.react("✖")
                     message.react("✅")
+                    message.react("❌")
                 })
             })
         }
