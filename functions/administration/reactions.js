@@ -1,4 +1,4 @@
-const Perms = require("./perms.js")
+const Perms = require("./perms.js");
 module.exports = {
     recommendations: function (message){
         if(Perms.checkperms(message)===true){

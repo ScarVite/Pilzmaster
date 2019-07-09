@@ -1,4 +1,4 @@
-const Perms = require("../administration/perms.js")
+const Perms = require("../administration/perms.js");
 module.exports = {
     help: function (message, Discord) {
         if (Perms.checkperms(message) === true) {

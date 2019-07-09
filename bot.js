@@ -11,7 +11,6 @@ var reactions = require("./functions/administration/reactions.js")
 var core = require("./functions/administration/core.js")
 var auth = require('./auth/auth.json');
 var round = require('math-round');
-var restarted = core.restarted;
 const prefix = "-";
 var restarted = false;
 const bot = new Discord.Client();

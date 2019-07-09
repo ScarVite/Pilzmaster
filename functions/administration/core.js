@@ -1,5 +1,5 @@
-const main = require("../../bot.js")
-const auth = require("../../auth/auth.json")
+const main = require("../../bot.js");
+const auth = require("../../auth/auth.json");
 module.exports = { 
     restart: function (message, bot) {
         if (message.author.id == 141218912934166528 || message.author.id == 533665091468656650) {
