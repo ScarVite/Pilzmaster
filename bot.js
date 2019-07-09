@@ -1,3 +1,8 @@
+module.exports= {
+    changerestarted: function() {
+            restarted = true
+    }
+}
 const Discord = require('discord.js');
 var rank = require('./functions/moderation/check_rank.js')
 var minigames = require('./functions/fun/minigames.js')
@@ -6,8 +11,9 @@ var reactions = require("./functions/administration/reactions.js")
 var core = require("./functions/administration/core.js")
 var auth = require('./auth/auth.json');
 var round = require('math-round');
-var restarted = false;
+var restarted = core.restarted;
 const prefix = "-";
+var restarted = false;
 const bot = new Discord.Client();
 const avatarembed = new Discord.RichEmbed();
 bot.login(auth.token);
@@ -57,15 +63,18 @@ bot.on('message', function (message, reaction) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
-            case 'recomm-react' :
+            case 'recomm-react':
                 reactions.recommendations(message)
                 break;
-         //   case 'remove':
+                //   case 'remove':
                 reactions.remove(message)
-            break;
+                break;
+            case 'problem':
+                message.reply(" https://i.ibb.co/gvTzN2S/vu409zuiqhg21.jpg")
+                break;
             case 'time':
                 const time = new Date();
-                message.reply(" Es ist:  " + time.getHours() + ":" + time.getMinutes() +":"+ time.getSeconds()) 
+                message.reply(" Es ist:  " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds())
                 break;
             case 'rickroll':
                 //message.react
@@ -104,10 +113,10 @@ bot.on('message', function (message, reaction) {
                 message.reply('Pong! :ping_pong: (' + round(bot.ping) + 'ms) :ping_pong:')
                 break;
             case 'restart':
-                core.restart(message,bot)
+                core.restart(message, bot)
                 break;
             case 'stop':
-                core.stop(message,bot)
+                core.stop(message, bot)
                 break;
             default:
                 break;
