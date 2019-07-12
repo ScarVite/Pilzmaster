@@ -2,19 +2,19 @@ module.exports = {
     reaction: function (message) {
         var reacted = false
         var me = 593821541934825493
-        message.channel.send("Auf die Plätze").then(function(message){
-            setTimeout(function () {message.edit("Fertig ?")  }, 5000)
-            setTimeout(function () {message.edit("LOS!")  }, 10000)
-            setTimeout(function () {message.react("🔴")  }, 10000)
-            setTimeout(function () {message.edit("STOP ")  }, 11000)
+        message.channel.send("Auf die Plätze").then(function (message) {
+            setTimeout(function () { message.edit("Fertig ?") }, 5000)
+            setTimeout(function () { message.edit("LOS!") }, 10000)
+            setTimeout(function () { message.react("🔴") }, 10000)
+            setTimeout(function () { message.edit("STOP ") }, 11000)
             //setTimeout(function () {MessageReaction.remove(593821541934825493)}, 11000)
-             }) 
-             //if(message.author.id == MessageReaction.users ){
-              //   message.channel.send("Good Job")
-            // }
-}, 
+        })
+        //if(message.author.id == MessageReaction.users ){
+        //   message.channel.send("Good Job")
+        // }
+    },
     diceroll: function (message) {
-        let dice = Math.floor(Math.random() * 6) + 1  
+        let dice = Math.floor(Math.random() * 6) + 1
         switch (dice) {
             case 1:
                 message.channel.send("Sie Haben eine 1 gewürfelt", {
@@ -48,6 +48,21 @@ module.exports = {
                 break;
             default:
                 message.channel.send("Wow wie hast du das geschafft, du hast eine " + dice + ". gewürfelt, schreibe deinen erfolg Bitte ScarVite#6606 auf Discord")
+                break;
+        }
+    },
+    coinflip: function (message) {
+        let coin = Math.floor(Math.random() * 2) + 1
+        switch (coin) {
+            case 1:
+                message.channel.send("Sie Haben die Vorderseite Erwischt ", {
+                    file: "https://i.ibb.co/6D10tCt/KM187-2002b.jpg"
+                })
+                break;
+            case 2:
+                message.channel.send("Sie Haben die Rückseite Erwischt ", {
+                    file: "https://i.ibb.co/qpwF24k/Uncirculated-Obverse-small.jpg"
+                })
                 break;
         }
     }

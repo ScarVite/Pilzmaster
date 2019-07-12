@@ -19,6 +19,7 @@ module.exports = {
                 .setTitle('User-Help')
                 .addField('Fun', '`-dice` - Throws 1 Dice randomly \n' + 
                 '`-react` - This will start an Game where you have to react to an message **WIP**\n'+
+                '`-coin` - This Will Flip an Coin \n'+
                 '`-<command>` - Folgt Noch'
                 , true)
                 .addBlankField()

@@ -85,6 +85,9 @@ bot.on('message', function (message, reaction) {
             case 'react':
                 minigames.reaction(message)
                 break;
+                case 'coin':
+                    minigames.coinflip(message)
+                    break;
             case 'dice':
                 minigames.diceroll(message);
                 break;
