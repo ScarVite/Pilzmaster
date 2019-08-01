@@ -10,7 +10,7 @@ const Pilzner = "589470019910631444"
 
 module.exports = {
     check_role: function (message) {
-        if(message.guild !== null){
+        if (message.guild !== null) {
             let member = message.member;
             if (message.member.roles.has(Pfifferling) && message.member.roles.has(Steinpilz)) {
                 member.removeRole(Pfifferling).catch(console.error);

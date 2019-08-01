@@ -4,8 +4,7 @@ module.exports = {
         const Head_Mod = "592447609231245342"
         const Admin = "589473098307338240"
         const Dev = "141218912934166528"
-        if (message.member.roles.has(Moderator) || message.member.roles.has(Head_Mod) || message.member.roles.has(Dev) || message.member.roles.has(Admin)) {
-            return (true)
+        if (message.member.roles.has(Moderator || Head_Mod || Dev || Admin)) {
         }
         else {
             return (false)

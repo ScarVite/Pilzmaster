@@ -1,6 +1,6 @@
 const main = require("../../bot.js");
 const auth = require("../../auth/auth.json");
-module.exports = { 
+module.exports = {
     restart: function (message, bot) {
         if (message.author.id == 141218912934166528 || message.author.id == 533665091468656650) {
             console.log(message.author.tag + ' restarted The bot')
@@ -29,6 +29,6 @@ module.exports = {
         else {
             message.reply('I´m sorry,:no_entry_sign: you don´t have the permssion to run this command :no_entry_sign:')
             console.log(message.author.tag + ' tried to use -stop')
-        } 
-    }, 
+        }
+    },
 }

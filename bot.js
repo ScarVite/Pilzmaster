@@ -1,6 +1,6 @@
-module.exports= {
-    changerestarted: function() {
-            restarted = true
+module.exports = {
+    changerestarted: function () {
+        restarted = true
     }
 }
 const Discord = require('discord.js');
@@ -102,14 +102,14 @@ bot.on('message', function (message, reaction) {
             case 'anipilz':
                 message.channel.send("What Else?")
                 break;
-            //case 'test':
+                //case 'test':
                 message.channel.send(message.mentions.users.first().id)
                 break;
             case 'gefahr':
                 message.channel.send("Miau")
                 break;
             case 'avatar':
-                fun.getavatar(message,Discord)
+                fun.getavatar(message, Discord)
                 break;
             case 'ping':
                 message.reply('Pong! :ping_pong: (' + round(bot.ping) + 'ms) :ping_pong:')
