@@ -7,16 +7,17 @@ const Discord = require('discord.js');
 var rank = require('./functions/moderation/check_rank.js')
 var troll = require('./functions/fun/troll.js')
 var minigames = require('./functions/fun/minigames.js')
+var fun = require('./functions/fun/fun.js')
 var mod = require("./functions/moderation/mod.js")
 var reactions = require("./functions/administration/reactions.js")
 var core = require("./functions/administration/core.js")
 var auth = require('./auth/auth.json');
 var test = require("./functions/test.js")
+var help = require('./functions/help.js')
 var round = require('math-round');
 const prefix = "-";
 var restarted = false;
 const bot = new Discord.Client();
-const avatarembed = new Discord.RichEmbed();
 bot.login(auth.token);
 
 bot.on('uncaughtException', function (exception) {
@@ -82,21 +83,21 @@ bot.on('message', function (message, reaction) {
                 message.reply(" Es ist:  " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds())
                 break;
             case 'rr':
-                    troll.rickroll(message)
+                troll.rickroll(message)
                 break;
             case 'react':
                 minigames.reaction(message)
                 break;
-                case 'coin':
-                    minigames.coinflip(message)
-                    break;
+            case 'coin':
+                minigames.coinflip(message)
+                break;
             case 'dice':
                 minigames.diceroll(message);
                 break;
             case 'meme':
                 message.channel.send("Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke ")
             case 'help':
-                mod.help(message, Discord)
+                help.help(message, Discord)
                 break;
             case 'anipilz':
                 message.channel.send("What Else?")
@@ -108,9 +109,7 @@ bot.on('message', function (message, reaction) {
                 message.channel.send("Miau")
                 break;
             case 'avatar':
-                avatarembed.setImage(message.author.avatarURL)
-                avatarembed.setFooter('The profile picture of  ' + message.author.tag)
-                message.channel.send(avatarembed)
+                fun.getavatar(message,Discord)
                 break;
             case 'ping':
                 message.reply('Pong! :ping_pong: (' + round(bot.ping) + 'ms) :ping_pong:')
