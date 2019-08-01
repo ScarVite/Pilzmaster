@@ -7,7 +7,7 @@ module.exports = {
             setTimeout(function () { message.edit("LOS!") }, 10000)
             setTimeout(function () { message.react("🔴") }, 10000)
             setTimeout(function () { message.edit("STOP ") }, 11000)
-            //setTimeout(function () {MessageReaction.remove(593821541934825493)}, 11000)
+            //setTimeout(function () {MessageReaction.remove(message.author.id)}, 11000)
         })
         //if(message.author.id == MessageReaction.users ){
         //   message.channel.send("Good Job")

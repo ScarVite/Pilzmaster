@@ -5,6 +5,7 @@ module.exports= {
 }
 const Discord = require('discord.js');
 var rank = require('./functions/moderation/check_rank.js')
+var troll = require('./functions/fun/troll.js')
 var minigames = require('./functions/fun/minigames.js')
 var mod = require("./functions/moderation/mod.js")
 var reactions = require("./functions/administration/reactions.js")
@@ -67,6 +68,7 @@ bot.on('message', function (message, reaction) {
                 message.channel.send(" hey you, yeah you, i Was Made By ScarVite#6606")
                 break;
             case 'recomm-react':
+                message.channel.send("Now Reacting to every message")
                 reactions.recommendations(message)
                 break;
                 //   case 'remove':
@@ -79,8 +81,8 @@ bot.on('message', function (message, reaction) {
                 const time = new Date();
                 message.reply(" Es ist:  " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds())
                 break;
-            case 'rickroll':
-                //message.react
+            case 'rr':
+                    troll.rickroll(message)
                 break;
             case 'react':
                 minigames.reaction(message)
@@ -93,15 +95,14 @@ bot.on('message', function (message, reaction) {
                 break;
             case 'meme':
                 message.channel.send("Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke ")
-                break;
             case 'help':
                 mod.help(message, Discord)
                 break;
             case 'anipilz':
                 message.channel.send("What Else?")
                 break;
-                 case 'test':
-                     test.test(message,cmd)
+            //case 'test':
+                message.channel.send(message.mentions.users.first().id)
                 break;
             case 'gefahr':
                 message.channel.send("Miau")
