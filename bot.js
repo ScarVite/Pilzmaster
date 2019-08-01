@@ -65,6 +65,24 @@ bot.on('message', function (message, reaction) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
+            case 'join':
+                if (message.member.voiceChannel) {
+                    const jchannel = message.member.voiceChannel
+                    jchannel.join()
+                }
+                else {
+                    message.reply('Ich kann das nicht, du musst zuerst in einem Voicechannel sein')
+                }
+                break;
+            case 'leave':
+                if (bot.voiceConnections) {
+                    const lchannel = message.member.voiceChannel
+                    message.guild.voiceConnection.disconnect();
+                }
+                else {
+                    message.reply('Wie soll ich einen Channel verlasseb, wenn ich mit keinem verbunden bin')
+                }
+                break;
             case 'author':
                 message.channel.send(" hey you, yeah you, i Was Made By ScarVite#6606")
                 break;
@@ -96,13 +114,14 @@ bot.on('message', function (message, reaction) {
                 break;
             case 'meme':
                 message.channel.send("Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke ")
+                break;
             case 'help':
                 help.help(message, Discord)
                 break;
             case 'anipilz':
                 message.channel.send("What Else?")
                 break;
-                //case 'test':
+            //case 'test':
                 message.channel.send(message.mentions.users.first().id)
                 break;
             case 'gefahr':

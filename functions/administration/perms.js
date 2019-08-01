@@ -5,6 +5,7 @@ module.exports = {
         const Admin = "589473098307338240"
         const Dev = "141218912934166528"
         if (message.member.roles.has(Moderator || Head_Mod || Dev || Admin)) {
+            return(true)
         }
         else {
             return (false)
