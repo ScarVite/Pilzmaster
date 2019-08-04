@@ -6,7 +6,8 @@ module.exports = {
             helpembed
                 .setColor('#0099ff')
                 .setTitle('Staff-Help')
-                .addField('Moderation', 'Folgt Noch', true)
+                .addField('Moderation', '-kick <user>` - Kickt den Erwähnten User\n'+
+                'Folgt noch', true)
                 .addBlankField()
                 .addField('Administration', 'Folgt Noch', true)
                 .setAuthor(message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')

@@ -93,6 +93,9 @@ bot.on('message', function (message, reaction) {
                 //   case 'remove':
                 reactions.remove(message)
                 break;
+                case 'kick':
+                    mod.kick(message)
+                    break;
             case 'problem':
                 message.reply(" https://i.ibb.co/gvTzN2S/vu409zuiqhg21.jpg")
                 break;
