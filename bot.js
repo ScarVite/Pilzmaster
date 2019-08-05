@@ -15,7 +15,7 @@ var auth = require('./auth/auth.json');
 var music = require('./functions/fun/music.js')
 var test = require("./functions/test.js")
 var help = require('./functions/help.js')
-const streamOptions = { seek: 0, volume: 0.5 };
+const streamOptions = { seek: 0, volume: 1 };
 var round = require('math-round');
 const prefix = "-";
 var restarted = false;
@@ -46,7 +46,7 @@ bot.on('ready', function (evt) {
     console.log('Connected as: ' + bot.user.tag);
 });
 
-bot.on('message', function (message, reaction) {
+bot.on('message', function (message) {
     if (message.author.id != 593821541934825493) {
         rank.check_role(message);
     }
@@ -68,8 +68,8 @@ bot.on('message', function (message, reaction) {
         args = args.splice(1);
         switch (cmd) {
             case 'volume':
-                //streamOptions.volume = args[0]
-                //message.reply('Die Lautsärke ist auf: '+streamOptions.volume+ ' eingestellt')
+                music.volume()
+                //message.reply('Die Lautsärke ist auf: '+args[0]+ ' eingestellt')
                 //console.log(streamOptions)
                 break;
             case 'play':
