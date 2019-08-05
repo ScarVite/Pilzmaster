@@ -18,12 +18,17 @@ module.exports = {
             helpembed
                 .setColor('#0099ff')
                 .setTitle('User-Help')
-                .addField('Fun', '`-dice` - Throws 1 Dice randomly \n' +
-                    '`-react` - This will start an Game where you have to react to an message **WIP**\n' +
-                    '`-coin` - This Will Flip an Coin \n' +
+                .addField('Fun', '`-dice` - Wirft einen Würfel \n' +
+                    '`-react` - Das Startet ein Spiel bei welchem ihr Reagieren müsst **WIP**\n' +
+                    '`-coin` - Wirft eine Münze \n' +
                     '`-rr <user>` - rickrollt eure Freunde/Feinde\n' +
                     '`-avatar (<user>)` - Sendet euer Profilbild in dem channel'
                     , true)
+                .addBlankField()
+                .addField('Musik', '`-play <youtube Url>` - Spielt einen Youtube Song ab \n' +
+                '`-leave` -Beendet Die Wiedergabe und Verlässt den Channel \n' +
+                '`-Folgt Noch`'
+                , true)
                 .addBlankField()
                 .addField('Informations', 'Folgt Noch', true)
                 .setAuthor(message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')

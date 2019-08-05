@@ -12,7 +12,8 @@
     "math-round": "^1.0.0",
     "node-opus": "^0.3.2",
     "node-torrent": "^0.2.2",
-    "opusscript": "0.0.6"
+    "opusscript": "0.0.6",
+    "ytdl-core": "^0.29.5"
   },
   "devDependencies": {},
   "scripts": {

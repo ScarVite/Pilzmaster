@@ -12,8 +12,10 @@ var mod = require("./functions/moderation/mod.js")
 var reactions = require("./functions/administration/reactions.js")
 var core = require("./functions/administration/core.js")
 var auth = require('./auth/auth.json');
+var music = require('./functions/fun/music.js')
 var test = require("./functions/test.js")
 var help = require('./functions/help.js')
+const streamOptions = { seek: 0, volume: 0.5 };
 var round = require('math-round');
 const prefix = "-";
 var restarted = false;
@@ -65,22 +67,22 @@ bot.on('message', function (message, reaction) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
-            case 'join':
-                if (message.member.voiceChannel) {
-                    const jchannel = message.member.voiceChannel
-                    jchannel.join()
-                }
-                else {
-                    message.reply('Ich kann das nicht, du musst zuerst in einem Voicechannel sein')
-                }
+            case 'volume':
+                //streamOptions.volume = args[0]
+                //message.reply('Die Lautsärke ist auf: '+streamOptions.volume+ ' eingestellt')
+                //console.log(streamOptions)
+                break;
+            case 'play':
+                var link = args[0]
+                music.streamyt(message, link, streamOptions);
                 break;
             case 'leave':
                 if (bot.voiceConnections) {
-                    const lchannel = message.member.voiceChannel
                     message.guild.voiceConnection.disconnect();
+                    message.channel.setTopic("Starte einen song mit -play <youtube link>")
                 }
                 else {
-                    message.reply('Wie soll ich einen Channel verlasseb, wenn ich mit keinem verbunden bin')
+                    message.reply('Wie soll ich einen Channel verlassen, wenn ich mit keinem verbunden bin')
                 }
                 break;
             case 'author':
@@ -93,9 +95,9 @@ bot.on('message', function (message, reaction) {
                 //   case 'remove':
                 reactions.remove(message)
                 break;
-                case 'kick':
-                    mod.kick(message)
-                    break;
+            case 'kick':
+                mod.kick(message)
+                break;
             case 'problem':
                 message.reply(" https://i.ibb.co/gvTzN2S/vu409zuiqhg21.jpg")
                 break;
@@ -124,8 +126,10 @@ bot.on('message', function (message, reaction) {
             case 'anipilz':
                 message.channel.send("What Else?")
                 break;
-            //case 'test':
-                message.channel.send(message.mentions.users.first().id)
+            case 'test':
+                if(test.test(message) === true){
+                    message.channel.send('main true')
+                }
                 break;
             case 'gefahr':
                 message.channel.send("Miau")
