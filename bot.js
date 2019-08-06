@@ -1,6 +1,9 @@
 module.exports = {
     changerestarted: function () {
         restarted = true
+    },
+    nextsong: function (message, streamOptions) {
+        music.streamyt(message, streamOptions, 'https://www.youtube.com/watch?v=_eM1ZAJWW_E')
     }
 }
 const Discord = require('discord.js');
@@ -15,7 +18,7 @@ var auth = require('./auth/auth.json');
 var music = require('./functions/fun/music.js')
 var test = require("./functions/test.js")
 var help = require('./functions/help.js')
-const streamOptions = { seek: 0, volume: 1 };
+var streamOptions = { seek: 0, volume: 1 };
 var round = require('math-round');
 const prefix = "-";
 var restarted = false;
@@ -67,6 +70,9 @@ bot.on('message', function (message) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
+            case 'queue':
+                music.printqueue(message, Discord )
+                break;
             case 'volume':
                 music.volume()
                 //message.reply('Die Lautsärke ist auf: '+args[0]+ ' eingestellt')
@@ -74,12 +80,11 @@ bot.on('message', function (message) {
                 break;
             case 'play':
                 var link = args[0]
-                music.streamyt(message, link, streamOptions);
+                music.streamyt(message, streamOptions, link);
                 break;
             case 'leave':
                 if (bot.voiceConnections) {
-                    message.guild.voiceConnection.disconnect();
-                    message.channel.setTopic("Starte einen song mit -play <youtube link>")
+                    music.killstream(message)
                 }
                 else {
                     message.reply('Wie soll ich einen Channel verlassen, wenn ich mit keinem verbunden bin')
@@ -127,7 +132,7 @@ bot.on('message', function (message) {
                 message.channel.send("What Else?")
                 break;
             case 'test':
-                if(test.test(message) === true){
+                if (test.test(message) === true) {
                     message.channel.send('main true')
                 }
                 break;

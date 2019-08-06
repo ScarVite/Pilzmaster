@@ -1,7 +1,7 @@
 {
-  "name": "Pilzmaster",
+  "name": "pilzmaster",
   "version": "0.0.1",
-  "description": "AniPilz Currency Bot",
+  "description": "AniPilz Bot",
   "main": "bot.js",
   "author": "ScarVite#6606",
   "dependencies": {
@@ -12,6 +12,7 @@
     "math-round": "^1.0.0",
     "opusscript": "0.0.6",
     "uws": "^100.0.1",
+    "youtube-search": "^1.1.4",
     "ytdl-core": "^0.29.5"
   },
   "devDependencies": {},
