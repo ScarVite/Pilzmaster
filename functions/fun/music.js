@@ -8,10 +8,8 @@ var opts = {
 var queue = []
 var length_cache
 var distimeout
-var url_cache1
-var url_cache2 = " "
+let player
 var length = 0;
-var main = require('../../bot.js')
 var joined = false;
 function validateYouTubeUrl(link) {
     if (link !== undefined && link !== '' && link !== null) {
@@ -29,25 +27,15 @@ function validateYouTubeUrl(link) {
     }
 }
 function vlength(message, streamOptions) {
-    if (url_cache1 !== url_cache2) {
-        if (length === length_cache) {
-            setTimeout(function () { vlength(message, streamOptions) }, 200);
-        }
-        else {
-            console.log('true')
-            url_cache1 = url_cache2
-            disconnect(message, streamOptions)
-        }
+    if (length === length_cache) {
+        setTimeout(function () { vlength(message, streamOptions) }, 200);
     }
     else {
-        console.log('true')
-        url_cache1 = url_cache2
+        length_cache = length
         disconnect(message, streamOptions)
     }
 }
 function play(message, streamOptions) {
-    url_cache1 = queue[0].url
-    length_cache = length;
     console.log(queue)
     ytdl.getInfo(queue[0].url).then(info => {
         length = (info.length_seconds * 1000)
@@ -55,15 +43,12 @@ function play(message, streamOptions) {
     });
     stream = ytdl(queue[0].url, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
-        console.log(streamOptions)
-        console.log('play')
-        let player = connection.playStream(stream, streamOptions)
+        player = connection.playStream(stream, streamOptions)
         queue.shift()
     }).catch(console.error);
     vlength(message, streamOptions)
 }
 function disconnect(message, streamOptions) {
-    console.log(length)
     distimeout = setTimeout(function () {
         if (queue[0] !== undefined) {
             play(message, streamOptions)
@@ -71,7 +56,6 @@ function disconnect(message, streamOptions) {
         else {
             if (message.guild.voiceConnection !== null) {
                 message.channel.send('Das Lied ist Vorbei')
-                console.log('Here2')
                 message.guild.voiceConnection.disconnect();
                 message.channel.setTopic("Starte einen song mit -play <youtube link>")
                 joined = false
@@ -99,7 +83,7 @@ module.exports = {
                     var obj = { url: link, title: '', duration: '' }
                     queue.push(obj)
                     if (joined === false) {
-                        url_cache1 = queue[0].url
+                        joined = true
                         length_cache = length;
                         ytdl.getInfo(queue[0].url).then(info => {
                             length = (info.length_seconds * 1000)
@@ -111,23 +95,17 @@ module.exports = {
                         const stream = ytdl(queue[0].url, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
                         vlength(message, streamOptions)
                         message.member.voiceChannel.join().then(connection => {
-                            console.log(streamOptions)
-                            let player = connection.playStream(stream, streamOptions)
+                            player = connection.playStream(stream, streamOptions)
                         }).catch(console.error);
-                        joined = true
                         queue.shift()
                     }
                     for (var i = 0; i < queue.length; i++) {
-                        console.log(queue)
-                        console.log('in for')
                         ytdl.getInfo(queue[i].url).then(info => {
-                            info.title = queue[i].title
-                            sectomin(info.length_seconds) = queue[i].duration
-                            console.log(queue)
+                            i= i-1
+                            queue[i].title = info.title
+                            queue[i].duration = sectomin(info.length_seconds)
                         })
-                        setTimeout(function(){}, 500)
                     }
-                    console.log('for fertig')
                 }
                 else {
                     message.reply('Du Musst einen gültigen Youtube link angeben')
@@ -176,5 +154,24 @@ module.exports = {
         message.channel.setTopic("Starte einen song mit -play <youtube link>")
         joined = false
         length = 0
+    },
+    loopsong:function(message,link){
+        ytdl.getInfo(link).then(info => {
+            length = (info.length_seconds * 1000)
+            message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + info.title + '" als dauerschleife. Länge: ' + sectomin(info.length_seconds))
+        });
+        if (streamOptions === undefined) {
+            streamOptions = { seek: 0, volume: 1 };
+        }
+        const stream = ytdl(link, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
+        message.member.voiceChannel.join().then(connection => {
+            let player = connection.playStream(stream, streamOptions)
+        }).catch(console.error);
+    },
+    pause:function(message){
+        player.pause()
+    },
+    resume:function(message){
+        player.resume()
     }
 }

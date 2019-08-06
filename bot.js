@@ -67,8 +67,18 @@ bot.on('message', function (message) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
+            case 'resume':
+                music.resume(message)
+                break;
+            case 'pause':
+                music.pause(message)
+                break;
+            case 'loop':
+                var link = args[0]
+                music.loopsong(message, link)
+                break;
             case 'queue':
-                music.printqueue(message, Discord )
+                music.printqueue(message, Discord)
                 break;
             case 'volume':
                 music.volume()
