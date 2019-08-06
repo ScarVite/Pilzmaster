@@ -1,9 +1,6 @@
 module.exports = {
     changerestarted: function () {
         restarted = true
-    },
-    nextsong: function (message, streamOptions) {
-        music.streamyt(message, streamOptions, 'https://www.youtube.com/watch?v=_eM1ZAJWW_E')
     }
 }
 const Discord = require('discord.js');

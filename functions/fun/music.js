@@ -96,9 +96,8 @@ module.exports = {
         if (message.member.voiceChannelID === '592389413296668722') {
             if (message.channel.id === '593398959427289108') {
                 if (validateYouTubeUrl(link) === true) {
-                    var obj = { url: link, title: "", duration: "" }
+                    var obj = { url: link, title: '', duration: '' }
                     queue.push(obj)
-                    console.log(joined)
                     if (joined === false) {
                         url_cache1 = queue[0].url
                         length_cache = length;
@@ -118,6 +117,17 @@ module.exports = {
                         joined = true
                         queue.shift()
                     }
+                    for (var i = 0; i < queue.length; i++) {
+                        console.log(queue)
+                        console.log('in for')
+                        ytdl.getInfo(queue[i].url).then(info => {
+                            info.title = queue[i].title
+                            sectomin(info.length_seconds) = queue[i].duration
+                            console.log(queue)
+                        })
+                        setTimeout(function(){}, 500)
+                    }
+                    console.log('for fertig')
                 }
                 else {
                     message.reply('Du Musst einen gültigen Youtube link angeben')
@@ -159,12 +169,12 @@ module.exports = {
         message.member.voiceChannel.join().then(connection => {
             connection.disconnect()
         }).catch(console.error);
-        queue= []
+        queue = []
         clearTimeout(distimeout)
         console.log("Cleared timeout")
         message.guild.voiceConnection.disconnect();
         message.channel.setTopic("Starte einen song mit -play <youtube link>")
         joined = false
-        length= 0
+        length = 0
     }
 }
