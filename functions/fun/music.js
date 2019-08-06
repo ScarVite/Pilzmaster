@@ -1,6 +1,7 @@
 const ytdl = require('ytdl-core');
 var queue = []
 var length = 0;
+var length_cache = length;
 var joined = false;
 function validateYouTubeUrl(link) {
     if (link !== undefined && link !== '' && link !== null) {
@@ -15,6 +16,30 @@ function validateYouTubeUrl(link) {
     }
     else {
         return (false)
+    }
+}
+function disconnect(message) {
+    if (queue[0] !== undefined) {
+        setTimeout(function () {
+            if (message.guild.voiceConnection !== null) {
+                console.log('Here')
+                message.guild.voiceConnection.disconnect();
+                joined = false
+                
+            }
+        }, length)
+        setTimeout(this.streamyt, length, message)
+    }
+    else {
+        setTimeout(function () {
+            message.channel.send('Das Lied ist Vorbei')
+            if (message.guild.voiceConnection !== null) {
+                console.log('Here2')
+                message.guild.voiceConnection.disconnect();
+                message.channel.setTopic("Starte einen song mit -play <youtube link>")
+                joined = false
+            }
+        }, length)
     }
 }
 function sectomin(time) {
@@ -35,46 +60,24 @@ module.exports = {
             if (message.channel.id === '593398959427289108') {
                 if (validateYouTubeUrl(link) === true) {
                     queue.push(link)
-                    ytdl.getInfo(queue[0]).then(info => {
-                        length = (info.length_seconds * 1000)
-                        message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + info.title + '" Länge: ' + sectomin(info.length_seconds))
-                        console.log(length)
-                    });
-                    const stream = ytdl(queue[0], { filter: 'audioonly', highWaterMark: 1024 * 1024 * 10 });
-                    console.log(queue)
-                    if (queue.length === 1) {
-                        if (joined === false) {
-                            message.member.voiceChannel.join().then(connection => {
-                                console.log(streamOptions)
-                                let player = connection.playStream(stream, streamOptions)
-                            }).catch(console.error);
-                            joined = true
-                        }
-                        else {
-                            return;
-                        }
+                    if (joined === false) {
+                        ytdl.getInfo(queue[0]).then(info => {
+                            length = (info.length_seconds * 1000)
+                            console.log(length)
+                            message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + info.title + '" Länge: ' + sectomin(info.length_seconds))
+                        });
+                        vlength(message)
+                        const stream = ytdl(queue[0], { filter: 'audioonly', highWaterMark: 1024 * 1024 * 10 });
+                        console.log(queue)
+                        message.member.voiceChannel.join().then(connection => {
+                            console.log(streamOptions)
+                            let player = connection.playStream(stream, streamOptions)
+                        }).catch(console.error);
+                        joined = true
+                        queue.shift()
                     }
-                    queue.shift()
                     console.log(queue)
                     console.log(length)
-                    if (queue[0] !== undefined) {
-                        setTimeout(function(){
-                            if (message.guild.voiceConnection !== null) {
-                                console.log('Here')
-                                message.guild.voiceConnection.disconnect();
-                            }
-                    }, length)
-                    setTimeout(this.streamyt, length, message)
-                }
-                else {
-                    setTimeout(function () {
-                        message.channel.send('Das Lied ist Vorbei')
-                        if (message.guild.voiceConnection !== null) {
-                            message.guild.voiceConnection.disconnect();
-                            message.channel.setTopic("Starte einen song mit -play <youtube link>")
-                        }
-                    }, length)
-                    }
                 }
                 else {
                     message.reply('Du Musst einen gültigen Youtube link angeben')
@@ -87,5 +90,16 @@ module.exports = {
         else {
             message.reply('Ich kann das nicht, du musst zuerst in "🎵Musik" sein')
         }
-    },
-}   
+    }
+}  
+function vlength(message) {
+    if (length === length_cache) {
+        setTimeout(function () { vlength(message) }, 200);
+    }
+    else {
+        console.log('true')
+        this.
+        disconnect(message)
+        
+    }
+}
