@@ -1,18 +1,46 @@
 const ytdl = require('ytdl-core');
 const auth = require('../../auth/auth.json')
+var perms = require('../administration/perms.js')
 var search = require('youtube-search');
 var opts = {
     maxResults: 5,
     key: auth.apikey
 };
+var streamOptions = { seek: 0, volume: 1 };
 var queue = []
 var length_cache = 0
 var looplength = 0
 var link_cache
+var paused = false
 var distimeout
 let player
 var length = 0;
 var joined = false;
+
+function checkrightchannel(message, link) {
+    if (message.member.voiceChannelID === '592389413296668722') {
+        if (message.channel.id === '593398959427289108') {
+            if (link !== link_cache) {
+                if (validateYouTubeUrl(link) === true) {
+                    return true
+                }
+                else {
+                    message.reply('Du Musst einen gültigen Youtube link angeben')
+                }
+            }
+            else {
+                message.reply(' Wenn du zwei mal das gleiche Lied spielen willst benutze -loop <link>')
+            }
+        }
+        else {
+            message.reply('Du musst in <#593398959427289108> schreiben ')
+        }
+    }
+    else {
+        message.reply('Ich kann das nicht, du musst zuerst in "🎵Musik" sein')
+    }
+
+}
 
 function validateYouTubeUrl(link) {
     if (link !== undefined && link !== '' && link !== null) {
@@ -30,46 +58,41 @@ function validateYouTubeUrl(link) {
     }
 }
 
-function vlength(message, streamOptions, loop, link) {
+function vlength(message, loop, link) {
     if (loop == false) {
         if (length === length_cache) {
-            setTimeout(function () { vlength(message, streamOptions, false) }, 200);
+            setTimeout(function () { vlength(message, false) }, 200);
         }
         else {
             length_cache = length
-            disconnect(message, streamOptions)
+            disconnect(message)
         }
     }
     else {
         if (looplength === length_cache) {
-            setTimeout(function () { vlength(message, streamOptions, true) }, 200);
-            console.log('i')
+            setTimeout(function () { vlength(message, true, link) }, 200);
         }
         else {
-            console.log('vlength')
-            setTimeout(() => {
-                playloop(message, streamOptions,link)
-            }, looplength);
+            playloop(message, link)
         }
     }
 }
 
-function play(message, streamOptions) {
-    console.log(queue)
+function play(message) {
     length = (queue[0].duration * 1000)
     message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + queue[0].title + '" Länge: ' + sectomin(queue[0].duration))
-    stream = ytdl(queue[0].url, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
+    stream = ytdl(queue[0].url, { audioonly: true, /*highWaterMark: 1024 * 1024 * 50*/ });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
         queue.shift()
     }).catch(console.error);
-    vlength(message, streamOptions, false)
+    vlength(message, false)
 }
 
-function disconnect(message, streamOptions) {
+function disconnect(message) {
     distimeout = setTimeout(function () {
         if (queue[0] !== undefined) {
-            play(message, streamOptions)
+            play(message)
         }
         else {
             if (message.guild.voiceConnection !== null) {
@@ -98,72 +121,55 @@ function sectomin(time) {
     return sec_min + " min";
 }
 
-function playloop(message,  streamOptions,link,stream) {
-    stream = ytdl(link, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
+function playloop(message, link) {
+    const stream = ytdl(link, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
-        console.log('playing')
     }).catch(console.error);
-        setTimeout(() => {
-            playloop(message,  streamOptions,link<stream)
-        }, looplength);
+    setTimeout(() => {
+        playloop(message, link)
+    }, looplength);
 }
 
 module.exports = {
-    streamyt: function (message, streamOptions, link) {
-        if (message.member.voiceChannelID === '592389413296668722') {
-            if (message.channel.id === '593398959427289108') {
-                if (link !== link_cache) {
-                    if (validateYouTubeUrl(link) === true) {
-                        link_cache = link
-                        var obj = { url: link, title: '', duration: '', gathered: false }
-                        queue.push(obj)
-                        if (joined === false) {
-                            joined = true
-                            length_cache = length;
-                            ytdl.getInfo(queue[0].url).then(info => {
-                                length = (info.length_seconds * 1000)
-                                message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + info.title + '" Länge: ' + sectomin(info.length_seconds))
-                            });
-                            if (streamOptions === undefined) {
-                                streamOptions = { seek: 0, volume: 1 };
-                            }
-                            const stream = ytdl(queue[0].url, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
-                            vlength(message, streamOptions, false)
-                            message.member.voiceChannel.join().then(connection => {
-                                player = connection.playStream(stream, streamOptions)
-                            }).catch(console.error);
-                            queue.shift()
-                        }
-                        for (var i = 0; i < queue.length; i++) {
-                            if (queue[i].gathered === false) {
-                                ytdl.getInfo(queue[i].url).then(info => {
-                                    i = i - 1
-                                    queue[i].title = info.title
-                                    queue[i].duration = info.length_seconds
-                                    queue[i].gathered = true
-                                })
-                            }
-                        }
-                    }
-                    else {
-                        message.reply('Du Musst einen gültigen Youtube link angeben')
-                    }
+    streamyt: function (message, link) {
+        if (checkrightchannel(message, link) == true) {
+            link_cache = link
+            var obj = { url: link, title: '', duration: '', gathered: false }
+            queue.push(obj)
+            if (joined === false) {
+                joined = true
+                length_cache = length;
+                ytdl.getInfo(queue[0].url).then(info => {
+                    length = (info.length_seconds * 1000)
+                    message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + info.title + '" Länge: ' + sectomin(info.length_seconds))
+                    message.reply(info.title + ' wird nun gespielt')
+                });
+                if (streamOptions === undefined) {
+                    streamOptions = { seek: 0, volume: 1 };
                 }
-                else {
-                    message.reply(' Wenn du zwei mal das gleiche Lied spielen willst benutze -loop <link>')
+                const stream = ytdl(queue[0].url, { audioonly: true,  /*highWaterMark: 1024 * 1024 * 50*/ });
+                vlength(message, false)
+                message.member.voiceChannel.join().then(connection => {
+                    player = connection.playStream(stream, streamOptions)
+                }).catch(console.error);
+                queue.shift()
+            }
+            for (var i = 0; i < queue.length; i++) {
+                if (queue[i].gathered === false) {
+                    ytdl.getInfo(queue[i].url).then(info => {
+                        i = i - 1
+                        queue[i].title = info.title
+                        queue[i].duration = info.length_seconds
+                        queue[i].gathered = true
+                        message.reply(info.title + 'wurde der warteschlang hinzugefügt')
+                    })
                 }
             }
-            else {
-                message.reply('Du musst in <#593398959427289108> schreiben ')
-            }
         }
-        else {
-            message.reply('Ich kann das nicht, du musst zuerst in "🎵Musik" sein')
-        }
+
     },
     printqueue: function (message, Discord) {
-        console.log(queue)
         if (queue[0] !== undefined) {
             const queueembed = new Discord.RichEmbed();
             queueembed
@@ -177,7 +183,6 @@ module.exports = {
             }
             queueembed
                 .setFooter('Angefordert von: ' + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
-            console.log('embed gesendet')
             message.channel.send(queueembed)
         }
         else {
@@ -185,9 +190,7 @@ module.exports = {
         }
     },
     killstream: function (message) {
-        message.member.voiceChannel.join().then(connection => {
-            connection.disconnect()
-        }).catch(console.error);
+        player.end()
         queue = []
         clearTimeout(distimeout)
         message.guild.voiceConnection.disconnect();
@@ -198,53 +201,56 @@ module.exports = {
         looprunning = false
         player.end()
     },
-    loopsong: function (message, link, streamOptions, looptrue) {
-        if (joined === false) {
-            if (looptrue !== false) {
-                if (message.member.voiceChannelID === '592389413296668722') {
-                    if (message.channel.id === '593398959427289108') {
-                        if (link !== link_cache) {
-                            if (validateYouTubeUrl(link) === true) {
-                                const stream = //ytdl(link, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
-                                ytdl.getInfo(link).then(info => {
-                                    console.log('info')
-                                    looplength = (info.length_seconds * 1000)
-                                    message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + info.title + '" als dauerschleife. Länge: ' + sectomin(info.length_seconds))
-                                }).then(
-                                )
-                                if (streamOptions === undefined) {
-                                    streamOptions = { seek: 0, volume: 1 };
-                                }
-                                vlength(message, streamOptions, true, link)
-                            }
-                            else {
-                                message.reply('Du Musst einen gültigen Youtube link angeben')
-                            }
-                        }
-                        else {
-                            message.reply(' Wenn du zwei mal das gleiche Lied spielen willst benutze -loop <link>')
-                        }
-                    }
-                    else {
-                        message.reply('Du musst in <#593398959427289108> schreiben ')
-                    }
+    loopsong: function (message, link) {
+        link_cache = ' '
+        if (checkrightchannel(message, link) === true) {
+            if (joined === false) {
+                ytdl.getInfo(link).then(info => {
+                    looplength = (info.length_seconds * 1000)
+                    message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + info.title + '" als dauerschleife. Länge: ' + sectomin(info.length_seconds))
+                }).then(
+                )
+                if (streamOptions === undefined) {
+                    streamOptions = { seek: 0, volume: 1 };
                 }
-                else {
-                    message.reply('Ich kann das nicht, du musst zuerst in "🎵Musik" sein')
-                }
+                joined = true
+                vlength(message, true, link)
+            }
+            else {
+                message.reply('Warte zuerst bis die derzeitige warteschlange/der Loop durchgeloffen ist oder nutze -leave')
+            }
+        }
+    },
+    pause: function (message) {
+        if (joined === true || loo) {
+            player.pause()
+            paused = true
+        }
+        else {
+            message.reply('Was Soll ich pausieren? Ich Spiele nix')
+        }
+    },
+    resume: function (message) {
+        if (paused === true) {
+            player.resume()
+            paused = false
+        }
+        else {
+            message.reply('Was Soll ich weiterspielen? Es ist nix pausiert')
+        }
+    },
+    volume: function (vol, message) {
+        if (perms.checkperms(message) === true) {
+            if (vol <= 5 || vol >= 0) {
+                player.setVolume(vol)
+                message.reply('Die Lautsärke ist auf: ' + player.volume + ' eingestellt')
+            }
+            else {
+                message.reply('Bitte gib eine Zahl zwischen 0 und 5 ein')
             }
         }
         else {
-            message.reply('Warte zuerst bis die derzeitige warteschlange durchgeloffen ist oder nutze -leave')
+            message.reply('Dieser Befehel ist aufgrund von Bugs derzeit auf bestimmt user limitiert')
         }
-    },
-    pause: function () {
-        player.pause()
-    },
-    resume: function () {
-        player.resume()
-    },
-    endloop: function () {
-        looptrue = false
     }
 }

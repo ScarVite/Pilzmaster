@@ -8,7 +8,7 @@ module.exports = {
             return(true)
         }
         else {
-            return (false)
+            message.reply('I´m sorry,:no_entry_sign: you don´t have the permssion to run this command :no_entry_sign:')
         }
     }
 }

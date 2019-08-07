@@ -15,7 +15,6 @@ var auth = require('./auth/auth.json');
 var music = require('./functions/fun/music.js')
 var test = require("./functions/test.js")
 var help = require('./functions/help.js')
-var streamOptions = { seek: 0, volume: 1 };
 var round = require('math-round');
 const prefix = "-";
 var restarted = false;
@@ -68,33 +67,28 @@ bot.on('message', function (message) {
         args = args.splice(1);
         switch (cmd) {
             case 'loop':
-                var link = args[0]
-                music.loopsong(message, link, streamOptions, true)
+                music.loopsong(message, args[0], true)
                 break;
             case 'resume':
-                music.resume()
+                music.resume(message)
                 break;
             case 'pause':
-                music.pause()
+                music.pause(message)
                 break;
             case 'loop':
-                var link = args[0]
-                music.loopsong(message, link)
+                music.loopsong(message, args[0])
                 break;
             case 'queue':
                 music.printqueue(message, Discord)
                 break;
             case 'volume':
-                music.volume()
-                //message.reply('Die Lautsärke ist auf: '+args[0]+ ' eingestellt')
-                //console.log(streamOptions)
+                music.volume(args[0],message)
                 break;
             case 'play':
-                var link = args[0]
-                music.streamyt(message, streamOptions, link);
+                music.streamyt(message, args[0]);
                 break;
             case 'leave':
-                if (bot.voiceConnections) {
+                if(message.guild.voiceConnection) {
                     music.killstream(message)
                 }
                 else {

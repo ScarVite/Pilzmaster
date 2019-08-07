@@ -6,11 +6,11 @@ module.exports = {
             helpembed
                 .setColor('#0099ff')
                 .setTitle('Staff-Help')
-                .addField('Moderation', '-kick <user>` - Kickt den Erwähnten User\n'+
-                'Folgt noch', true)
+                .addField('Moderation', '-kick <user>` - Kickt den Erwähnten User\n' +
+                    'Folgt noch', true)
                 .addBlankField()
                 .addField('Administration', 'Folgt Noch', true)
-                .setAuthor('Angefordert von: ' +message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setAuthor('Angefordert von: ' + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(helpembed)
         }
         else {
@@ -26,12 +26,14 @@ module.exports = {
                     , true)
                 .addBlankField()
                 .addField('Musik', '`-play <youtube Url>` - Spielt einen Youtube Song ab \n' +
-                '`-leave` -Beendet Die Wiedergabe und Verlässt den Channel \n' +
-                '`-Folgt Noch`'
-                , true)
+                    '`-loop <youtube link>` - Um das gewählte lied in dauerschleife spielen zu lassen\n' +
+                    '`-queue` - um die Warteschlange anzuzeigen\n' +
+                    '`-leave` - Beendet Die Wiedergabe und Verlässt den Channel \n' +
+                    '`-Folgt Noch`'
+                    , true)
                 .addBlankField()
                 .addField('Informations', 'Folgt Noch', true)
-                .setAuthor('Angefordert von: ' +message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setAuthor('Angefordert von: ' + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(helpembed)
         }
     }

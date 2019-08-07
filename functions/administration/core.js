@@ -13,7 +13,6 @@ module.exports = {
                 .then(() => bot.login(auth.token));
         }
         else {
-            message.reply('I´m sorry,:no_entry_sign: you don´t have the permssion to run this command :no_entry_sign:')
             console.log(message.author.tag + ' tried to use -restart')
         }
 
@@ -27,7 +26,6 @@ module.exports = {
             setTimeout(function () { bot.destroy() }, 5000);
         }
         else {
-            message.reply('I´m sorry,:no_entry_sign: you don´t have the permssion to run this command :no_entry_sign:')
             console.log(message.author.tag + ' tried to use -stop')
         }
     },
