@@ -10,7 +10,7 @@ module.exports = {
                 'Folgt noch', true)
                 .addBlankField()
                 .addField('Administration', 'Folgt Noch', true)
-                .setAuthor(message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setAuthor('Angefordert von: ' +message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(helpembed)
         }
         else {
@@ -31,7 +31,7 @@ module.exports = {
                 , true)
                 .addBlankField()
                 .addField('Informations', 'Folgt Noch', true)
-                .setAuthor(message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setAuthor('Angefordert von: ' +message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(helpembed)
         }
     }

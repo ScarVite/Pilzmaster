@@ -67,11 +67,15 @@ bot.on('message', function (message) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
+            case 'loop':
+                var link = args[0]
+                music.loopsong(message, link, streamOptions, true)
+                break;
             case 'resume':
-                music.resume(message)
+                music.resume()
                 break;
             case 'pause':
-                music.pause(message)
+                music.pause()
                 break;
             case 'loop':
                 var link = args[0]
