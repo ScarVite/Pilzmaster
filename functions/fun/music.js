@@ -16,19 +16,25 @@ var looplength = 0
 var link_cache
 var paused = false
 var distimeout
+var distimeout2
 let player
 var length = 0;
 var joined = false;
 
-function checkrightchannel(message, link) {
+function checkrightchannel(message, link, kill) {
     if (message.member.voiceChannelID === '592389413296668722') {
         if (message.channel.id === '593398959427289108') {
             if (link !== link_cache) {
-                if (validateYouTubeUrl(link) === true) {
-                    return true
+                if (kill === false) {
+                    if (validateYouTubeUrl(link) === true) {
+                        return true
+                    }
+                    else {
+                        message.reply(locales.validlink)
+                    }
                 }
                 else {
-                    message.reply(locales.validlink)
+                    return true
                 }
             }
             else {
@@ -84,7 +90,7 @@ function vlength(message, loop, link) {
 function play(message) {
     length = (queue[0].duration * 1000)
     message.channel.setTopic(locales.nowplaying + queue[0].title + locales.length + sectomin(queue[0].duration))
-    stream = ytdl(queue[0].url, { audioonly: true, highWaterMark: 1024 * 1024 * 50 });
+    stream = ytdl(queue[0].url, { quality: '45', audioonly: true, highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
         queue.shift()
@@ -126,13 +132,15 @@ function sectomin(time) {
 
 function playloop(message, link) {
     looprunning = true
-    const stream = ytdl(link, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
+    const stream = ytdl(link, { quality: '45', audioonly: true, highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
     }).catch(console.error);
-    setTimeout(() => {
-        if(looprunning===true){
-            playloop(message, link)
+    distimeout2 = setTimeout(() => {
+        if (looprunning === true) {
+            if (link_cache === link) {
+                playloop(message, link)
+            }
         }
     }, looplength);
 }
@@ -154,7 +162,7 @@ module.exports = {
                 if (streamOptions === undefined) {
                     streamOptions = { seek: 0, volume: 1 };
                 }
-                const stream = ytdl(queue[0].url, { audioonly: true,  highWaterMark: 1024 * 1024 * 50 });
+                const stream = ytdl(queue[0].url, { quality: '45', audioonly: true, highWaterMark: 1024 * 1024 * 50 });
                 vlength(message, false)
                 message.member.voiceChannel.join().then(connection => {
                     player = connection.playStream(stream, streamOptions)
@@ -196,17 +204,25 @@ module.exports = {
         }
     },
     killstream: function (message) {
-        player.end()
-        queue = []
-        clearTimeout(distimeout)
-        message.guild.voiceConnection.disconnect();
-        message.channel.setTopic(locales.startsong)
-        joined = false
-        length = 0
-        link_cache = ''
-        length_cache = 0
-        looprunning = false
-        player.end()
+        if (checkrightchannel(message, true) === true) {
+            if (joined === true) {
+                player.end()
+                queue = []
+                clearTimeout(distimeout)
+                clearTimeout(distimeout2)
+                message.guild.voiceConnection.disconnect();
+                message.channel.setTopic(locales.startsong)
+                joined = false
+                length = 0
+                link_cache = ''
+                length_cache = 0
+                looprunning = false
+                player.end()
+            }
+            else {
+                message.reply(locales.nothingplaying)
+            }
+        }
     },
     loopsong: function (message, link) {
         link_cache = ' '

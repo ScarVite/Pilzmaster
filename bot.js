@@ -4,7 +4,7 @@ module.exports = {
     }
 }
 const Discord = require('discord.js');
-var config = require ('./config.json')
+var config = require('./config.json')
 var rank = require('./functions/moderation/check_rank.js')
 var troll = require('./functions/fun/troll.js')
 var minigames = require('./functions/fun/minigames.js')
@@ -48,9 +48,7 @@ bot.on('ready', function (evt) {
 });
 
 bot.on('message', function (message) {
-    if (message.author.id != 593821541934825493) {
-        rank.check_role(message);
-    }
+    rank.check_role(message);
     if (message.guild === null) {
         if (message.content === '-stop') {
             stop(message);
@@ -84,13 +82,13 @@ bot.on('message', function (message) {
                 music.printqueue(message, Discord)
                 break;
             case 'volume':
-                music.volume(args[0],message)
+                music.volume(args[0], message)
                 break;
             case 'play':
                 music.streamyt(message, args[0]);
                 break;
             case 'leave':
-                if(message.guild.voiceConnection) {
+                if (message.guild.voiceConnection) {
                     music.killstream(message)
                 }
                 else {
@@ -139,9 +137,8 @@ bot.on('message', function (message) {
                 message.channel.send("What Else?")
                 break;
             case 'test':
-                if (test.test(message) === true) {
-                    message.channel.send('main true')
-                }
+                test.mujatest(message)
+                //test.loopsong(message,'https://www.youtube.com/watch?v=1vrEljMfXYo')
                 break;
             case 'gefahr':
                 message.channel.send("Miau")
