@@ -19,6 +19,7 @@
             "waitloop" : "Warte zuerst bis die derzeitige Warteschlange/der Loop durchgeloffen ist oder nutze -leave",
             "nothingtopause": "Was Soll ich denn pausieren? Ich spiele nix",
             "nothingtoresume": "Was soll ich denn weiterspielen? Es ist nix pausiert",
+            "nothingplaying": "Was soll ich beenden, Ich Spiele nix",
             "volume1":"Die Lautsärke ist auf: ",
             "volume2": " eingestellt",
             "numbervolume": "Bitte gib eine Zahl zwischen 0 und 5 ein",
