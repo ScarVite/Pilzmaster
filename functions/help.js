@@ -1,4 +1,6 @@
 const Perms = require("./administration/perms.js");
+var config = require('../config.json')
+var locales = require('../locales/' + config.lang + '.json')
 module.exports = {
     help: function (message, Discord) {
         if (Perms.checkperms(message) === true) {
@@ -10,7 +12,7 @@ module.exports = {
                     'Folgt noch', true)
                 .addBlankField()
                 .addField('Administration', 'Folgt Noch', true)
-                .setAuthor('Angefordert von: ' + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setAuthor(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(helpembed)
         }
         else {

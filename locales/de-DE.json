@@ -1,5 +1,7 @@
+
 {
-            "request": "Angefordert von",
+    "music": [{
+            "request": "Angefordert von: ",
             "validlink": "Du Musst einen gültigen Youtube link angeben",
             "duplicate": " Wenn du zwei mal das gleiche Lied spielen willst benutze -loop <link>",
             "wrongchannel1": "Du musst in <#",
@@ -22,4 +24,37 @@
             "numbervolume": "Bitte gib eine Zahl zwischen 0 und 5 ein",
             "bug": "Dieser Befehl ist aufgrund von Bugs derzeit auf bestimmte User limitiert"
 
+    }],
+    "bot": [{
+            
+    }],
+    "help": [{
+
+    }],
+    "minigames": [{
+        "dice": [{
+            "ready" : "Auf die Plätze",
+            "steady": "Fertig ?",
+            "go": "LOS!",
+            "dice1": "Sie Haben eine 1 gewürfelt",
+            "dice2": "Sie Haben eine 2 gewürfelt",
+            "dice3": "Sie Haben eine 3 gewürfelt",
+            "dice4": "Sie Haben eine 4 gewürfelt",
+            "dice5": "Sie Haben eine 5 gewürfelt",
+            "dice6": "Sie Haben eine 6 gewürfelt",
+            "dice-message1": "Wow wie hast du das geschafft, du hast eine ",
+            "dice-message2": ". gewürfelt, schreibe deinen erfolg Bitte ScarVite#6606 auf Discord"
+        }],
+        "coin" : [{
+            "front": "Sie Haben die Vorderseite Erwischt ",
+            "back": "Sie Haben die Rückseite Erwischt "
+        }]
+    }],
+    "troll": [{
+        "mention" : "Du musst einen Benutzer erwähnen, damit dies funktioniert",
+        "self-mention": "Du hast dich selber,... Warte so funktuniert das nicht"
+    }],
+    "fun": [{
+        "profilpic": "Das Profilbild von "
+    }]
 }
