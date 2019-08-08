@@ -6,8 +6,9 @@ var opts = {
     maxResults: 5,
     key: auth.apikey
 };
-var streamOptions = { seek: 0, volume: 1 };
+var streamOptions = { seek: 0, volume: 0.5 };
 var queue = []
+var looprunning = false
 var length_cache = 0
 var looplength = 0
 var link_cache
@@ -81,7 +82,7 @@ function vlength(message, loop, link) {
 function play(message) {
     length = (queue[0].duration * 1000)
     message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + queue[0].title + '" Länge: ' + sectomin(queue[0].duration))
-    stream = ytdl(queue[0].url, { audioonly: true, /*highWaterMark: 1024 * 1024 * 50*/ });
+    stream = ytdl(queue[0].url, { audioonly: true, highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
         queue.shift()
@@ -122,12 +123,15 @@ function sectomin(time) {
 }
 
 function playloop(message, link) {
+    looprunning = true
     const stream = ytdl(link, { filter: 'audioonly', highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
     }).catch(console.error);
     setTimeout(() => {
-        playloop(message, link)
+        if(looprunning===true){
+            playloop(message, link)
+        }
     }, looplength);
 }
 
@@ -148,7 +152,7 @@ module.exports = {
                 if (streamOptions === undefined) {
                     streamOptions = { seek: 0, volume: 1 };
                 }
-                const stream = ytdl(queue[0].url, { audioonly: true,  /*highWaterMark: 1024 * 1024 * 50*/ });
+                const stream = ytdl(queue[0].url, { audioonly: true,  highWaterMark: 1024 * 1024 * 50 });
                 vlength(message, false)
                 message.member.voiceChannel.join().then(connection => {
                     player = connection.playStream(stream, streamOptions)
@@ -197,6 +201,7 @@ module.exports = {
         message.channel.setTopic("Starte einen song mit -play <youtube link>")
         joined = false
         length = 0
+        link_cache = ''
         length_cache = 0
         looprunning = false
         player.end()
@@ -241,7 +246,8 @@ module.exports = {
     },
     volume: function (vol, message) {
         if (perms.checkperms(message) === true) {
-            if (vol <= 5 || vol >= 0) {
+            if (vol <= 5 && vol >= 0) {
+                streamOptions.volume = vol
                 player.setVolume(vol)
                 message.reply('Die Lautsärke ist auf: ' + player.volume + ' eingestellt')
             }
@@ -250,7 +256,7 @@ module.exports = {
             }
         }
         else {
-            message.reply('Dieser Befehel ist aufgrund von Bugs derzeit auf bestimmt user limitiert')
+            message.reply('Dieser Befehl ist aufgrund von Bugs derzeit auf bestimmt user limitiert')
         }
     }
 }
