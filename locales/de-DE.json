@@ -1,0 +1,25 @@
+{
+            "request": "Angefordert von",
+            "validlink": "Du Musst einen gültigen Youtube link angeben",
+            "duplicate": " Wenn du zwei mal das gleiche Lied spielen willst benutze -loop <link>",
+            "wrongchannel1": "Du musst in <#",
+            "wrongchannel2": "> schreiben!",
+            "musicchannel": "Ich kann das nicht, du musst zuerst in '🎵Musik' sein",
+            "nowplaying": ":musical_note: **Derzeit Läuft**: ",
+            "now": " wird nun gespielt",
+            "length": " Länge: ",
+            "songend": "Das Lied ist Vorbei",
+            "startsong": "Starte einen song mit -play <youtube link>",
+            "addwaitlist": " wurde der Warteschlang hinzugefügt.",
+            "waitlist": "Derzeitige Warteschlange",
+            "emptywaitlist": "Die Warteschlange ist derzeit leer,\n starte ein lied mit -play <youtube url>",
+            "loop": " als dauerschleife.",
+            "waitloop" : "Warte zuerst bis die derzeitige Warteschlange/der Loop durchgeloffen ist oder nutze -leave",
+            "nothingtopause": "Was Soll ich denn pausieren? Ich spiele nix",
+            "nothingtoresume": "Was soll ich denn weiterspielen? Es ist nix pausiert",
+            "volume1":"Die Lautsärke ist auf: ",
+            "volume2": " eingestellt",
+            "numbervolume": "Bitte gib eine Zahl zwischen 0 und 5 ein",
+            "bug": "Dieser Befehl ist aufgrund von Bugs derzeit auf bestimmte User limitiert"
+
+}

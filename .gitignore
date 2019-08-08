@@ -328,3 +328,6 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+functions/fun/test.js
+auth/auth.json
+auth/auth.json

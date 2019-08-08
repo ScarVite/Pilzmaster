@@ -4,6 +4,7 @@ module.exports = {
     }
 }
 const Discord = require('discord.js');
+var config = require ('./config.json')
 var rank = require('./functions/moderation/check_rank.js')
 var troll = require('./functions/fun/troll.js')
 var minigames = require('./functions/fun/minigames.js')
@@ -43,6 +44,7 @@ bot.on('ready', function (evt) {
         bot.channels.get("593824605144088586").send("Startup Sucessfull")
     }
     console.log('Connected as: ' + bot.user.tag);
+    console.log('Current Language is ' + config.lang)
 });
 
 bot.on('message', function (message) {

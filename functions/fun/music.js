@@ -1,5 +1,7 @@
 const ytdl = require('ytdl-core');
 const auth = require('../../auth/auth.json')
+var config = require('../../config.json')
+var locales = require('../../locales/' + config.lang + '.json')
 var perms = require('../administration/perms.js')
 var search = require('youtube-search');
 var opts = {
@@ -26,19 +28,19 @@ function checkrightchannel(message, link) {
                     return true
                 }
                 else {
-                    message.reply('Du Musst einen gültigen Youtube link angeben')
+                    message.reply(locales.validlink)
                 }
             }
             else {
-                message.reply(' Wenn du zwei mal das gleiche Lied spielen willst benutze -loop <link>')
+                message.reply(locales.duplicate)
             }
         }
         else {
-            message.reply('Du musst in <#593398959427289108> schreiben ')
+            message.reply(locales.wrongchannel1 + config.channel + locales.wrongchannel2)
         }
     }
     else {
-        message.reply('Ich kann das nicht, du musst zuerst in "🎵Musik" sein')
+        message.reply(locales.musicchannel)
     }
 
 }
@@ -81,7 +83,7 @@ function vlength(message, loop, link) {
 
 function play(message) {
     length = (queue[0].duration * 1000)
-    message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + queue[0].title + '" Länge: ' + sectomin(queue[0].duration))
+    message.channel.setTopic(locales.nowplaying + queue[0].title + locales.length + sectomin(queue[0].duration))
     stream = ytdl(queue[0].url, { audioonly: true, highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
@@ -97,9 +99,9 @@ function disconnect(message) {
         }
         else {
             if (message.guild.voiceConnection !== null) {
-                message.channel.send('Das Lied ist Vorbei')
+                message.channel.send(locales.songend)
                 message.guild.voiceConnection.disconnect();
-                message.channel.setTopic("Starte einen song mit -play <youtube link>")
+                message.channel.setTopic(locales.startsong)
                 joined = false
                 length = 0
                 player.end()
@@ -146,8 +148,8 @@ module.exports = {
                 length_cache = length;
                 ytdl.getInfo(queue[0].url).then(info => {
                     length = (info.length_seconds * 1000)
-                    message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + info.title + '" Länge: ' + sectomin(info.length_seconds))
-                    message.reply(info.title + ' wird nun gespielt')
+                    message.channel.setTopic(locales.nowplaying + info.title + locales.length + sectomin(info.length_seconds))
+                    message.reply(info.title + locales.now)
                 });
                 if (streamOptions === undefined) {
                     streamOptions = { seek: 0, volume: 1 };
@@ -166,7 +168,7 @@ module.exports = {
                         queue[i].title = info.title
                         queue[i].duration = info.length_seconds
                         queue[i].gathered = true
-                        message.reply(info.title + 'wurde der warteschlang hinzugefügt')
+                        message.reply(info.title + locales.addwaitlist)
                     })
                 }
             }
@@ -178,19 +180,19 @@ module.exports = {
             const queueembed = new Discord.RichEmbed();
             queueembed
                 .setColor('#735BC1')
-                .setTitle('Derzeitige Warteschlange')
+                .setTitle(locales.waitlist)
             for (var i = 0; i < queue.length; i++) {
                 if (queue[i] !== undefined) {
                     queueembed
-                        .addField((i + 1) + '. : ', queue[i].title + '. Länge: ' + sectomin(queue[i].duration))
+                        .addField((i + 1) + '. : ', queue[i].title + locales.length + sectomin(queue[i].duration))
                 }
             }
             queueembed
-                .setFooter('Angefordert von: ' + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setFooter(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(queueembed)
         }
         else {
-            message.channel.send('Die Warteschlange ist derzeit leer,\n starte ein lied mit -play <youtube url>')
+            message.channel.send(locales.emptywaitlist)
         }
     },
     killstream: function (message) {
@@ -198,7 +200,7 @@ module.exports = {
         queue = []
         clearTimeout(distimeout)
         message.guild.voiceConnection.disconnect();
-        message.channel.setTopic("Starte einen song mit -play <youtube link>")
+        message.channel.setTopic(locales.startsong)
         joined = false
         length = 0
         link_cache = ''
@@ -212,7 +214,7 @@ module.exports = {
             if (joined === false) {
                 ytdl.getInfo(link).then(info => {
                     looplength = (info.length_seconds * 1000)
-                    message.channel.setTopic(':musical_note: **Derzeit Läuft**: "' + info.title + '" als dauerschleife. Länge: ' + sectomin(info.length_seconds))
+                    message.channel.setTopic(locales.nowplaying + info.title + locales.loop + locales.length + sectomin(info.length_seconds))
                 }).then(
                 )
                 if (streamOptions === undefined) {
@@ -222,7 +224,7 @@ module.exports = {
                 vlength(message, true, link)
             }
             else {
-                message.reply('Warte zuerst bis die derzeitige warteschlange/der Loop durchgeloffen ist oder nutze -leave')
+                message.reply(locales.waitloop)
             }
         }
     },
@@ -232,7 +234,7 @@ module.exports = {
             paused = true
         }
         else {
-            message.reply('Was Soll ich pausieren? Ich Spiele nix')
+            message.reply(locales.nothingtopause)
         }
     },
     resume: function (message) {
@@ -241,7 +243,7 @@ module.exports = {
             paused = false
         }
         else {
-            message.reply('Was Soll ich weiterspielen? Es ist nix pausiert')
+            message.reply(locales.nothingtoresume)
         }
     },
     volume: function (vol, message) {
@@ -249,14 +251,14 @@ module.exports = {
             if (vol <= 5 && vol >= 0) {
                 streamOptions.volume = vol
                 player.setVolume(vol)
-                message.reply('Die Lautsärke ist auf: ' + player.volume + ' eingestellt')
+                message.reply(locales.volume1 + player.volume + locales.volume2)
             }
             else {
-                message.reply('Bitte gib eine Zahl zwischen 0 und 5 ein')
+                message.reply(locales.numbervolume)
             }
         }
         else {
-            message.reply('Dieser Befehl ist aufgrund von Bugs derzeit auf bestimmt user limitiert')
+            message.reply(locales.bug)
         }
     }
 }
