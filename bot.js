@@ -137,7 +137,7 @@ bot.on('message', function (message) {
                 message.channel.send("What Else?")
                 break;
             case 'test':
-                test.mujatest(message)
+                //test.mujatest(message)
                 //test.loopsong(message,'https://www.youtube.com/watch?v=1vrEljMfXYo')
                 break;
             case 'gefahr':
