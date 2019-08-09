@@ -5,11 +5,11 @@ module.exports = {
                 message.mentions.users.first().send("https://www.latlmes.com/breaking/dieser-trick-bringt-waifus-in-die-echte-welt-1")
             }
             else {
-                message.reply("Du musst einen Benutzer erwähnen, damit dies funktuniert")
+                message.reply(locales.troll.mention)
             }
         }
         else {
-            message.reply("Du hast dich selber,... Warte so funktuniert das nicht")
+            message.reply(locales.troll.self-mention)
         }
     }
 }

@@ -1,4 +1,6 @@
 const Perms = require("./administration/perms.js");
+var config = require('../../config.json')
+var locales = require('../../locales/' + config.lang + '.json')
 module.exports = {
     help: function (message, Discord) {
         if (Perms.checkperms(message) === true) {
