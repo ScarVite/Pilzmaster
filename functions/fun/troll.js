@@ -1,5 +1,3 @@
-var config = require('../../config.json')
-var locales = require('../../locales/' + config.lang + '.json')
 module.exports = {
     rickroll: function (message) {
         if (message.mentions.users.first() !== message.author) {
@@ -7,11 +5,11 @@ module.exports = {
                 message.mentions.users.first().send("https://www.latlmes.com/breaking/dieser-trick-bringt-waifus-in-die-echte-welt-1")
             }
             else {
-                message.reply(locales.troll.mention)
+                message.reply("Du musst einen Benutzer erwähnen, damit dies funktuniert")
             }
         }
         else {
-            message.reply(locales.troll.self-mention)
+            message.reply("Du hast dich selber,... Warte so funktuniert das nicht")
         }
     }
 }

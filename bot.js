@@ -14,7 +14,7 @@ var reactions = require("./functions/administration/reactions.js")
 var core = require("./functions/administration/core.js")
 var auth = require('./auth/auth.json');
 var music = require('./functions/fun/music.js')
-//var test = require("./functions/test.js")
+var test = require("./functions/test.js")
 var help = require('./functions/help.js')
 var round = require('math-round');
 const prefix = "-";
@@ -26,7 +26,7 @@ bot.on('uncaughtException', function (exception) {
     console.log(exception);
 });
 
-bot.on('ready', function (evt) {
+bot.on('ready', function () {
     bot.user.setPresence({
         game: {
             name: 'Scar code',
@@ -66,6 +66,9 @@ bot.on('message', function (message) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
+            case 'search':
+                music.searchyt(message,args[0], args[1],args[2],args[3])
+                break;
             case 'loop':
                 music.loopsong(message, args[0], true)
                 break;

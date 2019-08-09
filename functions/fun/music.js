@@ -1,9 +1,10 @@
 const ytdl = require('ytdl-core');
+var search = require('youtube-search');
 const auth = require('../../auth/auth.json')
 var config = require('../../config.json')
 var locales = require('../../locales/' + config.lang + '.json')
 var perms = require('../administration/perms.js')
-var search = require('youtube-search');
+
 var opts = {
     maxResults: 5,
     key: auth.apikey
@@ -89,8 +90,8 @@ function vlength(message, loop, link) {
 
 function play(message) {
     length = (queue[0].duration * 1000)
-    message.channel.setTopic(locales.music.now + queue[0].title + locales.music.length + sectomin(queue[0].duration))
-    stream = ytdl(queue[0].url, { quality: '45', audioonly: true, highWaterMark: 1024 * 1024 * 50 });
+    message.channel.setTopic(locales.nowplaying + queue[0].title + locales.music.length + sectomin(queue[0].duration))
+    stream = ytdl(queue[0].url, { filter: (format) => ['45'], audioonly: true, highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
         queue.shift()
@@ -132,15 +133,13 @@ function sectomin(time) {
 
 function playloop(message, link) {
     looprunning = true
-    const stream = ytdl(link, { quality: '45', audioonly: true, highWaterMark: 1024 * 1024 * 50 });
+    const stream = ytdl(link, { filter: (format) => ['45'], audioonly: true, highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
     }).catch(console.error);
     distimeout2 = setTimeout(() => {
         if (looprunning === true) {
-            if (link_cache === link) {
-                playloop(message, link)
-            }
+            playloop(message, link)
         }
     }, looplength);
 }
@@ -162,7 +161,7 @@ module.exports = {
                 if (streamOptions === undefined) {
                     streamOptions = { seek: 0, volume: 1 };
                 }
-                const stream = ytdl(queue[0].url, { quality: '45', audioonly: true, highWaterMark: 1024 * 1024 * 50 });
+                const stream = ytdl(queue[0].url, { filter: (format) => ['45'], audioonly: true, highWaterMark: 1024 * 1024 * 50 });
                 vlength(message, false)
                 message.member.voiceChannel.join().then(connection => {
                     player = connection.playStream(stream, streamOptions)
@@ -188,7 +187,7 @@ module.exports = {
             const queueembed = new Discord.RichEmbed();
             queueembed
                 .setColor('#735BC1')
-                .setTitle(locales.music.waitlist)
+                .setTitle(locales.waitlist)
             for (var i = 0; i < queue.length; i++) {
                 if (queue[i] !== undefined) {
                     queueembed
@@ -200,7 +199,7 @@ module.exports = {
             message.channel.send(queueembed)
         }
         else {
-            message.channel.send(locales.music.emptywaitlist)
+            message.channel.send(locales.emptywaitlist)
         }
     },
     killstream: function (message) {
@@ -225,7 +224,6 @@ module.exports = {
         }
     },
     loopsong: function (message, link) {
-        link_cache = ' '
         if (checkrightchannel(message, link) === true) {
             if (joined === false) {
                 ytdl.getInfo(link).then(info => {
@@ -276,5 +274,35 @@ module.exports = {
         else {
             message.reply(locales.music.bug)
         }
+    },
+    searchyt: function (message, term1, term2, term3, term4) {
+        if(term1 !== undefined){
+            if(term2 !== undefined){
+                if(term3 !== undefined){
+                    if(term4 !== undefined){
+                        term = term1 + ' ' + term2 + ' ' + term3 + ' ' + term4
+                    }
+                    else{
+                        term = term1 + ' ' + term2 + ' ' + term3 
+                    }
+                }
+                else{
+                    term = term1 + ' ' + term2
+                }
+            }
+            else{
+                term = term1
+            }
+        }
+        else{
+            message.channel.send(locales.music.validsearch)
+            return
+        }
+
+        search(term, opts, function (err, results) {
+            if (err) return console.log(err)
+            message.channel.send(term)
+            console.dir(results)
+        })
     }
 }

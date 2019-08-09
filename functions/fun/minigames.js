@@ -1,12 +1,10 @@
-var config = require('../../config.json')
-var locales = require('../../locales/' + config.lang + '.json')
 module.exports = {
     reaction: function (message) {
         var reacted = false
         var me = 593821541934825493
-        message.channel.send(locales.minigames.ready).then(function (message) {
-            setTimeout(function () { message.edit(locales.minigames.steady) }, 5000)
-            setTimeout(function () { message.edit(locales.minigames.go) }, 10000)
+        message.channel.send("Auf die Plätze").then(function (message) {
+            setTimeout(function () { message.edit("Fertig ?") }, 5000)
+            setTimeout(function () { message.edit("LOS!") }, 10000)
             setTimeout(function () { message.react("🔴") }, 10000)
             setTimeout(function () { message.edit("STOP ") }, 11000)
             //setTimeout(function () {MessageReaction.remove(message.author.id)}, 11000)
@@ -19,37 +17,37 @@ module.exports = {
         let dice = Math.floor(Math.random() * 6) + 1
         switch (dice) {
             case 1:
-                message.channel.send(locales.minigames.dice1, {
+                message.channel.send("Sie Haben eine 1 gewürfelt", {
                     file: "https://i.ibb.co/V0ykKRN/dice1.png"
                 })
                 break;
             case 2:
-                message.channel.send(locales.minigames.dice2, {
+                message.channel.send("Sie Haben eine 2 gewürfelt", {
                     file: "https://i.ibb.co/ZGPvsXL/dice2.png"
                 })
                 break;
             case 3:
-                message.channel.send(locales.minigames.dice3, {
+                message.channel.send("Sie Haben eine 3 gewürfelt", {
                     file: "https://i.ibb.co/Z891FGq/dice3.png"
                 })
                 break;
             case 4:
-                message.channel.send(locales.minigames.dice4, {
+                message.channel.send("Sie Haben eine 4 gewürfelt", {
                     file: "https://i.ibb.co/qNYLRMt/dice4.png"
                 })
                 break;
             case 5:
-                message.channel.send(locales.minigames.dice5, {
+                message.channel.send("Sie Haben eine 5 gewürfelt", {
                     file: "https://i.ibb.co/LP9mZ4V/dice5.png"
                 })
                 break;
             case 6:
-                message.channel.send(locales.minigames.dice6, {
+                message.channel.send("Sie Haben eine 6 gewürfelt", {
                     file: "https://i.ibb.co/93SZs7J/dice6.png"
                 })
                 break;
             default:
-                message.channel.send(locales.minigames.dice-message1 + dice + locales.minigames.dice-message2)
+                message.channel.send("Wow wie hast du das geschafft, du hast eine " + dice + ". gewürfelt, schreibe deinen erfolg Bitte ScarVite#6606 auf Discord")
                 break;
         }
     },
@@ -57,12 +55,12 @@ module.exports = {
         let coin = Math.floor(Math.random() * 2) + 1
         switch (coin) {
             case 1:
-                message.channel.send(locales.minigames.front, {
+                message.channel.send("Sie Haben die Vorderseite Erwischt ", {
                     file: "https://i.ibb.co/6D10tCt/KM187-2002b.jpg"
                 })
                 break;
             case 2:
-                message.channel.send(locales.minigames.back, {
+                message.channel.send("Sie Haben die Rückseite Erwischt ", {
                     file: "https://i.ibb.co/qpwF24k/Uncirculated-Obverse-small.jpg"
                 })
                 break;

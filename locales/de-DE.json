@@ -1,4 +1,3 @@
-
 {
     "music": {
             "request": "Angefordert von: ",
@@ -23,7 +22,8 @@
             "volume1":"Die Lautsärke ist auf: ",
             "volume2": " eingestellt",
             "numbervolume": "Bitte gib eine Zahl zwischen 0 und 5 ein",
-            "bug": "Dieser Befehl ist aufgrund von Bugs derzeit auf bestimmte User limitiert"
+            "bug": "Dieser Befehl ist aufgrund von Bugs derzeit auf bestimmte User limitiert",
+            "validsearch": "Bitte gib  ein Such Argument an"
 
     },
     "bot": {
