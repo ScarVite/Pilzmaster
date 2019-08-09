@@ -10,7 +10,7 @@
     "ffmpeg": "0.0.4",
     "libsodium-wrappers": "^0.7.4",
     "math-round": "^1.0.0",
-    "opusscript": "0.0.6",
+    "opusscript": "0.0.7",
     "uws": "^100.0.1",
     "youtube-search": "^1.1.4",
     "ytdl-core": "^0.29.5"
