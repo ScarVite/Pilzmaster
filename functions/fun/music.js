@@ -89,7 +89,7 @@ function vlength(message, loop, link) {
 
 function play(message) {
     length = (queue[0].duration * 1000)
-    message.channel.setTopic(locales.music.music.now + queue[0].title + locales.music.length + sectomin(queue[0].duration))
+    message.channel.setTopic(locales.music.now + queue[0].title + locales.music.length + sectomin(queue[0].duration))
     stream = ytdl(queue[0].url, { quality: '45', audioonly: true, highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
@@ -157,7 +157,7 @@ module.exports = {
                 ytdl.getInfo(queue[0].url).then(info => {
                     length = (info.length_seconds * 1000)
                     message.channel.setTopic(locales.music.nowplaying + info.title + locales.music.length + sectomin(info.length_seconds))
-                    message.reply(info.title + locales.music.music.now)
+                    message.reply(info.title + locales.music.now)
                 });
                 if (streamOptions === undefined) {
                     streamOptions = { seek: 0, volume: 1 };
