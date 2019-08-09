@@ -1,5 +1,4 @@
 const ytdl = require('ytdl-core');
-const mujaca = require('./Mujaca.json')
 var streamOptions = { seek: 0, volume: 0.5 };
 var queue = []
 var looprunning = false
