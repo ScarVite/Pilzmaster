@@ -6,9 +6,11 @@ var locales = require('../../locales/' + config.lang + '.json')
 var perms = require('../administration/perms.js')
 
 var opts = {
+    part: 'snippet',
     maxResults: 5,
     key: auth.apikey,
-    type: 'video'
+    type: 'video',
+    fields: 'items(id(videoId),snippet(title)),pageInfo'
 };
 var streamOptions = { seek: 0, volume: 0.5 };
 var queue = []
@@ -308,6 +310,7 @@ module.exports = {
         search(term, opts, function (err, results) {
             if (err) return console.log(err)
             //message.channel.send(term)
+            console.log(results)
             const searchembed = new Discord.RichEmbed();
             searchembed
                 .setColor('#0099ff')
@@ -320,17 +323,20 @@ module.exports = {
                 .addField(":four:", results[3]["title"])
                 //.addBlankField()
                 .addField(":five:", results[4]["title"])
+                .setFooter(locales.music.request + message.author.tag, message.author.avatarURL)
             //message.channel.send(searchembed) 
             message.channel.send(searchembed)//.then(message => {
-            message.react('1⃣').then(r => {
-                message.react('2⃣').then(r => {
-                    message.react('3⃣').then(r => {
-                        message.react('4⃣').then(r => {
-                            message.react('5⃣');
+            message.react('1⃣')
+                .then(r => {
+                    message.react('2⃣')
+                        .then(r => {
+                            message.react('3⃣')
+                                .then(r => {
+                                    message.react('4⃣')
+                                        .then(r => { message.react('5⃣'); })
+                                })
                         })
-                    })
-                })
-            });
+                });
 
 
             message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '1⃣' || reaction.emoji.name == '2⃣' || reaction.emoji.name == '3⃣' || reaction.emoji.name == '4⃣' || reaction.emoji.name == '5⃣'),
@@ -362,9 +368,10 @@ module.exports = {
                         return;
                     }
                     //})
-                })
+                }).catch()
 
         }
         )
+
     }
 }
