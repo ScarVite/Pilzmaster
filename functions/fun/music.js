@@ -6,7 +6,7 @@ var locales = require('../../locales/' + config.lang + '.json')
 var perms = require('../administration/perms.js')
 
 var opts = {
-    maxResults: 2,
+    maxResults: 5,
     key: auth.apikey
 };
 var streamOptions = { seek: 0, volume: 0.5 };
@@ -276,66 +276,89 @@ module.exports = {
         }
     },
     searchyt: function (message, term1, term2, term3, term4, Discord) {
-        if(term1 !== undefined){
-            if(term2 !== undefined){
-                if(term3 !== undefined){
-                    if(term4 !== undefined){
+        if (term1 !== undefined) {
+            if (term2 !== undefined) {
+                if (term3 !== undefined) {
+                    if (term4 !== undefined) {
                         term = term1 + ' ' + term2 + ' ' + term3 + ' ' + term4
                         this.search(message, term, Discord)
                     }
-                    else{
-                        term = term1 + ' ' + term2 + ' ' + term3 
+                    else {
+                        term = term1 + ' ' + term2 + ' ' + term3
                         this.search(message, term, Discord)
                     }
                 }
-                else{
+                else {
                     term = term1 + ' ' + term2
                     this.search(message, term, Discord)
                 }
             }
-            else{
+            else {
                 term = term1
                 this.search(message, term, Discord)
             }
         }
-        else{
+        else {
             message.channel.send(locales.music.validsearch)
             return
         }
     },
-        search: function (message, term, Discord ,err) {
-            search(term, opts, function (err, results) {
+    search: function (message, term, Discord, err) {
+        search(term, opts, function (err, results) {
             if (err) return console.log(err)
             //message.channel.send(term)
             const searchembed = new Discord.RichEmbed();
             searchembed
-            .setColor('#0099ff')
-            .addField(":one:",results[0]["title"])
-            //.addBlankField()
-            .addField(":two:",results[1]["title"])
-            //.addBlankField()
-            //.addField(":three:",results[2]["title"])
-            //.addBlankField()
-           // .addField(":four:",results[3]["title"])
-            //.addBlankField()
-            //.addField(":five:",results[4]["title"])
-           //message.channel.send(searchembed) 
-          message.channel.send(searchembed).then(message => {
-          message.react('👍').then(r => {
-            message.react('👎');
-    });
-          
-          console.log("sended")
-                message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '👍' || reaction.emoji.name == '👎'),
-          { max: 1, time: 10000 }).then(collected => {
-            if (collected.first().emoji.name == '👍') {
-                module.exports.streamyt(message, results[0]["link"])
-                return;
+                .setColor('#0099ff')
+                .addField(":one:", results[0]["title"])
+                //.addBlankField()
+                .addField(":two:", results[1]["title"])
+                //.addBlankField()
+                .addField(":three:", results[2]["title"])
+                //.addBlankField()
+                .addField(":four:", results[3]["title"])
+                //.addBlankField()
+                .addField(":five:", results[4]["title"])
+            //message.channel.send(searchembed) 
+            message.channel.send(searchembed)//.then(message => {
+                message.react('1⃣').then(r => {
+                    message.react('2⃣').then(r => {
+                        message.react('3⃣').then(r => {
+                            message.react('4⃣').then(r => {
+                                message.react('5⃣');
+                            })
+                        })
+                    })
+                            });
+
+
+                message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '1⃣' || reaction.emoji.name == '2⃣' || reaction.emoji.name == '3⃣'  || reaction.emoji.name == '4⃣'  || reaction.emoji.name == '5⃣'),
+                    { max: 1, time: 10000 }).then(collected => {
+                        if (collected.first().emoji.name == '1⃣') {
+                            module.exports.streamyt(message, results[0]["link"])
+                            return;
+                        }
+                        
+                        if (collected.first().emoji.name == '2⃣') {
+                            module.exports.streamyt(message, results[1]["link"])
+                            return;
+                        }
+                        if (collected.first().emoji.name == '3⃣') {
+                            module.exports.streamyt(message, results[2]["link"])
+                            return;
+                        }
+                        if (collected.first().emoji.name == '4⃣') {
+                            module.exports.streamyt(message, results[3]["link"])
+                            return;
+                        }
+                        if (collected.first().emoji.name == '5⃣') {
+                            module.exports.streamyt(message, results[4]["link"])
+                            return;
+                        }
+                    //})
+            })
+
         }
-        else
-        module.exports.streamyt(message, results[1]["link"])
-})             
-})     
-        
+        )
     }
-            )}}
+}
