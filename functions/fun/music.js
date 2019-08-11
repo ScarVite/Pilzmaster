@@ -7,7 +7,8 @@ var perms = require('../administration/perms.js')
 
 var opts = {
     maxResults: 5,
-    key: auth.apikey
+    key: auth.apikey,
+    type: 'video'
 };
 var streamOptions = { seek: 0, volume: 0.5 };
 var queue = []
@@ -321,42 +322,47 @@ module.exports = {
                 .addField(":five:", results[4]["title"])
             //message.channel.send(searchembed) 
             message.channel.send(searchembed)//.then(message => {
-                message.react('1⃣').then(r => {
-                    message.react('2⃣').then(r => {
-                        message.react('3⃣').then(r => {
-                            message.react('4⃣').then(r => {
-                                message.react('5⃣');
-                            })
+            message.react('1⃣').then(r => {
+                message.react('2⃣').then(r => {
+                    message.react('3⃣').then(r => {
+                        message.react('4⃣').then(r => {
+                            message.react('5⃣');
                         })
                     })
-                            });
+                })
+            });
 
 
-                message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '1⃣' || reaction.emoji.name == '2⃣' || reaction.emoji.name == '3⃣'  || reaction.emoji.name == '4⃣'  || reaction.emoji.name == '5⃣'),
-                    { max: 1, time: 10000 }).then(collected => {
-                        if (collected.first().emoji.name == '1⃣') {
-                            module.exports.streamyt(message, results[0]["link"])
-                            return;
-                        }
-                        
-                        if (collected.first().emoji.name == '2⃣') {
-                            module.exports.streamyt(message, results[1]["link"])
-                            return;
-                        }
-                        if (collected.first().emoji.name == '3⃣') {
-                            module.exports.streamyt(message, results[2]["link"])
-                            return;
-                        }
-                        if (collected.first().emoji.name == '4⃣') {
-                            module.exports.streamyt(message, results[3]["link"])
-                            return;
-                        }
-                        if (collected.first().emoji.name == '5⃣') {
-                            module.exports.streamyt(message, results[4]["link"])
-                            return;
-                        }
+            message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '1⃣' || reaction.emoji.name == '2⃣' || reaction.emoji.name == '3⃣' || reaction.emoji.name == '4⃣' || reaction.emoji.name == '5⃣'),
+                { max: 1, time: 10000 }).then(collected => {
+                    if (collected.first().emoji.name == '1⃣') {
+                        module.exports.streamyt(message, results[0]["link"])
+                        message.delete()
+                        return;
+                    }
+
+                    if (collected.first().emoji.name == '2⃣') {
+                        module.exports.streamyt(message, results[1]["link"])
+                        message.delete()
+                        return;
+                    }
+                    if (collected.first().emoji.name == '3⃣') {
+                        module.exports.streamyt(message, results[2]["link"])
+                        message.delete()
+                        return;
+                    }
+                    if (collected.first().emoji.name == '4⃣') {
+                        module.exports.streamyt(message, results[3]["link"])
+                        message.delete()
+                        return;
+                    }
+                    if (collected.first().emoji.name == '5⃣') {
+                        module.exports.streamyt(message, results[4]["link"])
+                        message.delete()
+                        return;
+                    }
                     //})
-            })
+                })
 
         }
         )
