@@ -332,7 +332,6 @@ module.exports = {
                 module.exports.streamyt(message, results[0]["link"])
                 return;
         }
-        
         else
         module.exports.streamyt(message, results[1]["link"])
 })             
