@@ -14,7 +14,7 @@ var reactions = require("./functions/administration/reactions.js")
 var core = require("./functions/administration/core.js")
 var auth = require('./auth/auth.json');
 var music = require('./functions/fun/music.js')
-var test = require("./functions/test.js")
+//var test = require("./functions/test.js")
 var help = require('./functions/help.js')
 var round = require('math-round');
 const prefix = "-";
@@ -67,7 +67,7 @@ bot.on('message', function (message) {
         args = args.splice(1);
         switch (cmd) {
             case 'search':
-                music.searchyt(message,args[0], args[1],args[2],args[3])
+                music.searchyt(message,args[0], args[1],args[2],args[3], Discord)
                 break;
             case 'loop':
                 music.loopsong(message, args[0], true)

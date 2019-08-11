@@ -6,7 +6,7 @@ var locales = require('../../locales/' + config.lang + '.json')
 var perms = require('../administration/perms.js')
 
 var opts = {
-    maxResults: 5,
+    maxResults: 2,
     key: auth.apikey
 };
 var streamOptions = { seek: 0, volume: 0.5 };
@@ -275,34 +275,67 @@ module.exports = {
             message.reply(locales.music.bug)
         }
     },
-    searchyt: function (message, term1, term2, term3, term4) {
+    searchyt: function (message, term1, term2, term3, term4, Discord) {
         if(term1 !== undefined){
             if(term2 !== undefined){
                 if(term3 !== undefined){
                     if(term4 !== undefined){
                         term = term1 + ' ' + term2 + ' ' + term3 + ' ' + term4
+                        this.search(message, term, Discord)
                     }
                     else{
                         term = term1 + ' ' + term2 + ' ' + term3 
+                        this.search(message, term, Discord)
                     }
                 }
                 else{
                     term = term1 + ' ' + term2
+                    this.search(message, term, Discord)
                 }
             }
             else{
                 term = term1
+                this.search(message, term, Discord)
             }
         }
         else{
             message.channel.send(locales.music.validsearch)
             return
         }
-
-        search(term, opts, function (err, results) {
+    },
+        search: function (message, term, Discord ,err) {
+            search(term, opts, function (err, results) {
             if (err) return console.log(err)
-            message.channel.send(term)
-            console.dir(results)
-        })
+            //message.channel.send(term)
+            const searchembed = new Discord.RichEmbed();
+            searchembed
+            .setColor('#0099ff')
+            .addField(":one:",results[0]["title"])
+            //.addBlankField()
+            .addField(":two:",results[1]["title"])
+            //.addBlankField()
+            //.addField(":three:",results[2]["title"])
+            //.addBlankField()
+           // .addField(":four:",results[3]["title"])
+            //.addBlankField()
+            //.addField(":five:",results[4]["title"])
+           //message.channel.send(searchembed) 
+          message.channel.send(searchembed).then(message => {
+          message.react('👍').then(r => {
+            message.react('👎');
+    });
+          
+          console.log("sended")
+                message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '👍' || reaction.emoji.name == '👎'),
+          { max: 1, time: 10000 }).then(collected => {
+            if (collected.first().emoji.name == '👍') {
+                module.exports.streamyt(message, results[0]["link"])
+                return;
+        }
+        else
+        module.exports.streamyt(message, results[1]["link"])
+})             
+})     
+        
     }
-}
+            )}}
