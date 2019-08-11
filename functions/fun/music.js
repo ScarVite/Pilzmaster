@@ -330,7 +330,6 @@ module.exports = {
           { max: 1, time: 10000 }).then(collected => {
             if (collected.first().emoji.name == '👍') {
                 module.exports.streamyt(message, results[0]["link"])
-                jhdvbk
                 return;
         }
         else
