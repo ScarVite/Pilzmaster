@@ -92,15 +92,10 @@ bot.on('message', function (message) {
                 music.streamyt(message, args[0]);
                 break;
             case 'leave':
-                if (message.guild.voiceConnection) {
-                    music.killstream(message)
-                }
-                else {
-                    message.reply('Wie soll ich einen Channel verlassen, wenn ich mit keinem verbunden bin')
-                }
+                music.killstream(message)
                 break;
             case 'author':
-                message.channel.send(" hey you, yeah you, i Was Made By ScarVite#6606")
+                message.channel.send(locales.bot.author)
                 break;
             case 'recomm-react':
                 message.channel.send("Now Reacting to every message")
@@ -145,7 +140,6 @@ bot.on('message', function (message) {
                 //test.loopsong(message,'https://www.youtube.com/watch?v=1vrEljMfXYo')
                 break;
             case 'gefahr':
-                message.channel.send("Miau")
                 break;
             case 'avatar':
                 fun.getavatar(message, Discord)

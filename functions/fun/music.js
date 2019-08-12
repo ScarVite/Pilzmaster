@@ -205,24 +205,29 @@ module.exports = {
         }
     },
     killstream: function (message) {
-        if (checkrightchannel(message, true) === true) {
-            if (joined === true) {
-                player.end()
-                queue = []
-                clearTimeout(distimeout)
-                clearTimeout(distimeout2)
-                message.guild.voiceConnection.disconnect();
-                message.channel.setTopic(locales.music.startsong)
-                joined = false
-                length = 0
-                link_cache = ''
-                length_cache = 0
-                looprunning = false
-                player.end()
+        if (message.guild.voiceConnection) {
+            if (checkrightchannel(message, true) === true) {
+                if (joined === true) {
+                    player.end()
+                    queue = []
+                    clearTimeout(distimeout)
+                    clearTimeout(distimeout2)
+                    message.guild.voiceConnection.disconnect();
+                    message.channel.setTopic(locales.music.startsong)
+                    joined = false
+                    length = 0
+                    link_cache = ''
+                    length_cache = 0
+                    looprunning = false
+                    player.end()
+                }
+                else {
+                    message.reply(locales.music.nothingplaying)
+                }
             }
-            else {
-                message.reply(locales.music.nothingplaying)
-            }
+        }
+        else {
+            message.reply(locales.music.notconnected)
         }
     },
     loopsong: function (message, link) {

@@ -1,6 +1,7 @@
 {
     "request": "Angefordert von: ",
     "music": {
+        "notconnected":"Wie soll ich einen Channel verlassen, wenn ich mit keinem verbunden bin",
         "validlink": "Du Musst einen gültigen Youtube link angeben",
         "duplicate": " Wenn du zwei mal das gleiche Lied spielen willst benutze -loop <link>",
         "wrongchannel1": "Du musst in <#",
@@ -27,7 +28,8 @@
         "noreact": "Es ist keine Angabe erfolgt"
     },
     "bot": {
-        "meme":"Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke"
+        "meme":"Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke",
+        "author":"Hey du ja du, Ich wurde von ScarVite#6606 und Tiggy#3633 programmiert"
 
     },
     "help": {
