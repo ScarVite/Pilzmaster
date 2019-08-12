@@ -26,7 +26,10 @@
         "validsearch": "Bitte gib  ein Such Argument an",
         "noreact": "Es ist keine Angabe erfolgt"
     },
-    "bot": {},
+    "bot": {
+        "meme":"Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke"
+
+    },
     "help": {
         "notdone": "`Folgt Noch`",
         "user2": "Benutzer Hilfe",
@@ -69,9 +72,10 @@
     },
     "troll": {
         "mention": "Du musst einen Benutzer erwähnen, damit dies funktioniert",
-        "self-mention": "Du hast dich selber,... Warte so funktuniert das nicht"
+        "self-mention": "Du hast dich selber,... Warte so funktuniert das nicht",
+        "rr-link":"https://www.latlmes.com/breaking/dieser-trick-bringt-waifus-in-die-echte-welt-1"
     },
     "fun": {
-        "profilpic": "Das Profilbild von "
+        "profilepic": "Das Profilbild von "
     }
 }

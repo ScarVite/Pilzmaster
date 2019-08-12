@@ -5,6 +5,7 @@ module.exports = {
 }
 const Discord = require('discord.js');
 var config = require('./config.json')
+var locales = require('./locales/' + config.lang + '.json')
 var rank = require('./functions/moderation/check_rank.js')
 var troll = require('./functions/fun/troll.js')
 var minigames = require('./functions/fun/minigames.js')
@@ -131,7 +132,7 @@ bot.on('message', function (message) {
                 minigames.diceroll(message);
                 break;
             case 'meme':
-                message.channel.send("Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke ")
+                message.channel.send(locales.bot.meme)
                 break;
             case 'help':
                 help.help(message, Discord)
