@@ -45,14 +45,15 @@ function checkrightchannel(message, link, kill) {
                 message.reply(locales.music.duplicate)
             }
         }
+
         else {
             message.reply(locales.music.wrongchannel1 + config.channel + locales.music.wrongchannel2)
         }
     }
+
     else {
         message.reply(locales.music.musicchannel)
     }
-
 }
 
 function validateYouTubeUrl(link) {
@@ -310,7 +311,7 @@ module.exports = {
         search(term, opts, function (err, results) {
             if (err) return console.log(err)
             //message.channel.send(term)
-            console.log(results)
+            //console.log(results)
             const searchembed = new Discord.RichEmbed();
             searchembed
                 .setColor('#0099ff')
@@ -337,39 +338,41 @@ module.exports = {
                                 })
                         })
                 });
+            const searchft = (reaction, user) => {
+                return ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣'].includes(reaction.emoji.name) && user.id == message.author.id;
+            };
+            message.awaitReactions(searchft, { max: 1, time: 15000 }).then(collected => {
+                if (collected.first().emoji.name == '1⃣') {
+                    module.exports.streamyt(message, results[0]["link"])
+                    //message.delete()
+                    return;
+                }
 
+                if (collected.first().emoji.name == '2⃣') {
+                    module.exports.streamyt(message, results[1]["link"])
+                    //message.delete()
+                    return;
+                }
+                if (collected.first().emoji.name == '3⃣') {
+                    module.exports.streamyt(message, results[2]["link"])
+                    //message.delete()
+                    return;
+                }
+                if (collected.first().emoji.name == '4⃣') {
+                    module.exports.streamyt(message, results[3]["link"])
+                    //message.delete()
+                    return;
+                }
+                if (collected.first().emoji.name == '5⃣') {
+                    module.exports.streamyt(message, results[4]["link"])
+                    //message.delete()
+                    return;
+                }
 
-            message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '1⃣' || reaction.emoji.name == '2⃣' || reaction.emoji.name == '3⃣' || reaction.emoji.name == '4⃣' || reaction.emoji.name == '5⃣'),
-                { max: 1, time: 10000 }).then(collected => {
-                    if (collected.first().emoji.name == '1⃣') {
-                        module.exports.streamyt(message, results[0]["link"])
-                        message.delete()
-                        return;
-                    }
-
-                    if (collected.first().emoji.name == '2⃣') {
-                        module.exports.streamyt(message, results[1]["link"])
-                        message.delete()
-                        return;
-                    }
-                    if (collected.first().emoji.name == '3⃣') {
-                        module.exports.streamyt(message, results[2]["link"])
-                        message.delete()
-                        return;
-                    }
-                    if (collected.first().emoji.name == '4⃣') {
-                        module.exports.streamyt(message, results[3]["link"])
-                        message.delete()
-                        return;
-                    }
-                    if (collected.first().emoji.name == '5⃣') {
-                        module.exports.streamyt(message, results[4]["link"])
-                        message.delete()
-                        return;
-                    }
-                    //})
-                }).catch()
-
+            }).catch(collected => {
+                message.reply(locales.music.noreact)
+            })
+            //})
         }
         )
 
