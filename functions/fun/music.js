@@ -6,9 +6,11 @@ var locales = require('../../locales/' + config.lang + '.json')
 var perms = require('../administration/perms.js')
 
 var opts = {
+    part: 'snippet',
     maxResults: 5,
     key: auth.apikey,
-    type: 'video'
+    type: 'video',
+    fields: 'items(id(videoId),snippet(title)),pageInfo'
 };
 var streamOptions = { seek: 0, volume: 0.5 };
 var queue = []
@@ -50,7 +52,6 @@ function checkrightchannel(message, link, kill) {
     else {
         message.reply(locales.music.musicchannel)
     }
-
 }
 
 function validateYouTubeUrl(link) {
@@ -91,7 +92,7 @@ function vlength(message, loop, link) {
 
 function play(message) {
     length = (queue[0].duration * 1000)
-    message.channel.setTopic(locales.nowplaying + queue[0].title + locales.music.length + sectomin(queue[0].duration))
+    message.channel.setTopic(locales.music.nowplaying + queue[0].title + locales.music.length + sectomin(queue[0].duration))
     stream = ytdl(queue[0].url, { filter: (format) => ['45'], audioonly: true, highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
@@ -196,7 +197,7 @@ module.exports = {
                 }
             }
             queueembed
-                .setFooter(locales.music.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setFooter(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(queueembed)
         }
         else {
@@ -308,6 +309,7 @@ module.exports = {
         search(term, opts, function (err, results) {
             if (err) return console.log(err)
             //message.channel.send(term)
+            //console.log(results)
             const searchembed = new Discord.RichEmbed();
             searchembed
                 .setColor('#0099ff')
@@ -320,51 +322,58 @@ module.exports = {
                 .addField(":four:", results[3]["title"])
                 //.addBlankField()
                 .addField(":five:", results[4]["title"])
+                .setFooter(locales.request + message.author.tag, message.author.avatarURL)
             //message.channel.send(searchembed) 
             message.channel.send(searchembed)//.then(message => {
-            message.react('1⃣').then(r => {
-                message.react('2⃣').then(r => {
-                    message.react('3⃣').then(r => {
-                        message.react('4⃣').then(r => {
-                            message.react('5⃣');
+            message.react('1⃣')
+                .then(r => {
+                    message.react('2⃣')
+                        .then(r => {
+                            message.react('3⃣')
+                                .then(r => {
+                                    message.react('4⃣')
+                                        .then(r => { message.react('5⃣'); })
+                                })
                         })
-                    })
-                })
-            });
+                });
+            const searchft = (reaction, user) => {
+                return ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣'].includes(reaction.emoji.name) && user.id == message.author.id;
+            };
+            message.awaitReactions(searchft, { max: 1, time: 15000 }).then(collected => {
+                if (collected.first().emoji.name == '1⃣') {
+                    module.exports.streamyt(message, results[0]["link"])
+                    //message.delete()
+                    return;
+                }
 
+                if (collected.first().emoji.name == '2⃣') {
+                    module.exports.streamyt(message, results[1]["link"])
+                    //message.delete()
+                    return;
+                }
+                if (collected.first().emoji.name == '3⃣') {
+                    module.exports.streamyt(message, results[2]["link"])
+                    //message.delete()
+                    return;
+                }
+                if (collected.first().emoji.name == '4⃣') {
+                    module.exports.streamyt(message, results[3]["link"])
+                    //message.delete()
+                    return;
+                }
+                if (collected.first().emoji.name == '5⃣') {
+                    module.exports.streamyt(message, results[4]["link"])
+                    //message.delete()
+                    return;
+                }
 
-            message.awaitReactions((reaction, user) => user.id == message.author.id && (reaction.emoji.name == '1⃣' || reaction.emoji.name == '2⃣' || reaction.emoji.name == '3⃣' || reaction.emoji.name == '4⃣' || reaction.emoji.name == '5⃣'),
-                { max: 1, time: 10000 }).then(collected => {
-                    if (collected.first().emoji.name == '1⃣') {
-                        module.exports.streamyt(message, results[0]["link"])
-                        message.delete()
-                        return;
-                    }
-
-                    if (collected.first().emoji.name == '2⃣') {
-                        module.exports.streamyt(message, results[1]["link"])
-                        message.delete()
-                        return;
-                    }
-                    if (collected.first().emoji.name == '3⃣') {
-                        module.exports.streamyt(message, results[2]["link"])
-                        message.delete()
-                        return;
-                    }
-                    if (collected.first().emoji.name == '4⃣') {
-                        module.exports.streamyt(message, results[3]["link"])
-                        message.delete()
-                        return;
-                    }
-                    if (collected.first().emoji.name == '5⃣') {
-                        module.exports.streamyt(message, results[4]["link"])
-                        message.delete()
-                        return;
-                    }
-                    //})
-                })
-
+            }).catch(collected => {
+                message.reply(locales.music.noreact)
+            })
+            //})
         }
         )
+
     }
 }
+
