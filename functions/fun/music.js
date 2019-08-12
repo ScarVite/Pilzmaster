@@ -45,12 +45,10 @@ function checkrightchannel(message, link, kill) {
                 message.reply(locales.music.duplicate)
             }
         }
-
         else {
             message.reply(locales.music.wrongchannel1 + config.channel + locales.music.wrongchannel2)
         }
     }
-
     else {
         message.reply(locales.music.musicchannel)
     }
@@ -94,7 +92,7 @@ function vlength(message, loop, link) {
 
 function play(message) {
     length = (queue[0].duration * 1000)
-    message.channel.setTopic(locales.nowplaying + queue[0].title + locales.music.length + sectomin(queue[0].duration))
+    message.channel.setTopic(locales.music.nowplaying + queue[0].title + locales.music.length + sectomin(queue[0].duration))
     stream = ytdl(queue[0].url, { filter: (format) => ['45'], audioonly: true, highWaterMark: 1024 * 1024 * 50 });
     message.member.voiceChannel.join().then(connection => {
         player = connection.playStream(stream, streamOptions)
@@ -199,7 +197,7 @@ module.exports = {
                 }
             }
             queueembed
-                .setFooter(locales.music.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setFooter(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(queueembed)
         }
         else {
@@ -324,7 +322,7 @@ module.exports = {
                 .addField(":four:", results[3]["title"])
                 //.addBlankField()
                 .addField(":five:", results[4]["title"])
-                .setFooter(locales.music.request + message.author.tag, message.author.avatarURL)
+                .setFooter(locales.request + message.author.tag, message.author.avatarURL)
             //message.channel.send(searchembed) 
             message.channel.send(searchembed)//.then(message => {
             message.react('1⃣')
@@ -378,3 +376,4 @@ module.exports = {
 
     }
 }
+

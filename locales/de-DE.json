@@ -1,42 +1,56 @@
 {
+    "request": "Angefordert von: ",
     "music": {
-            "request": "Angefordert von: ",
-            "validlink": "Du Musst einen gültigen Youtube link angeben",
-            "duplicate": " Wenn du zwei mal das gleiche Lied spielen willst benutze -loop <link>",
-            "wrongchannel1": "Du musst in <#",
-            "wrongchannel2": "> schreiben!",
-            "musicchannel": "Ich kann das nicht, du musst zuerst in '🎵Musik' sein",
-            "nowplaying": ":musical_note: **Derzeit Läuft**: ",
-            "now": " wird nun gespielt",
-            "length": " Länge: ",
-            "songend": "Das Lied ist Vorbei",
-            "startsong": "Starte einen song mit -play <youtube link>",
-            "addwaitlist": " wurde der Warteschlang hinzugefügt.",
-            "waitlist": "Derzeitige Warteschlange",
-            "emptywaitlist": "Die Warteschlange ist derzeit leer,\n starte ein lied mit -play <youtube url>",
-            "loop": " als dauerschleife.",
-            "waitloop" : "Warte zuerst bis die derzeitige Warteschlange/der Loop durchgeloffen ist oder nutze -leave",
-            "nothingtopause": "Was Soll ich denn pausieren? Ich spiele nix",
-            "nothingtoresume": "Was soll ich denn weiterspielen? Es ist nix pausiert",
-            "nothingplaying": "Was soll ich beenden, Ich Spiele nix",
-            "volume1":"Die Lautsärke ist auf: ",
-            "volume2": " eingestellt",
-            "numbervolume": "Bitte gib eine Zahl zwischen 0 und 5 ein",
-            "bug": "Dieser Befehl ist aufgrund von Bugs derzeit auf bestimmte User limitiert",
-            "validsearch": "Bitte gib ein Such Argument an",
-            "noreact": "Es ist keine Angabe erfolgt"
-
-
+        "validlink": "Du Musst einen gültigen Youtube link angeben",
+        "duplicate": " Wenn du zwei mal das gleiche Lied spielen willst benutze -loop <link>",
+        "wrongchannel1": "Du musst in <#",
+        "wrongchannel2": "> schreiben!",
+        "musicchannel": "Ich kann das nicht, du musst zuerst in '🎵Musik' sein",
+        "nowplaying": ":musical_note: **Derzeit Läuft**: ",
+        "now": " wird nun gespielt",
+        "length": " Länge: ",
+        "songend": "Das Lied ist Vorbei",
+        "startsong": "Starte einen song mit -play <youtube link>",
+        "addwaitlist": " wurde der Warteschlang hinzugefügt.",
+        "waitlist": "Derzeitige Warteschlange",
+        "emptywaitlist": "Die Warteschlange ist derzeit leer,\n starte ein lied mit -play <youtube url>",
+        "loop": " als dauerschleife.",
+        "waitloop": "Warte zuerst bis die derzeitige Warteschlange/der Loop durchgeloffen ist oder nutze -leave",
+        "nothingtopause": "Was Soll ich denn pausieren? Ich spiele nix",
+        "nothingtoresume": "Was soll ich denn weiterspielen? Es ist nix pausiert",
+        "nothingplaying": "Was soll ich beenden, Ich Spiele nix",
+        "volume1": "Die Lautsärke ist auf: ",
+        "volume2": " eingestellt",
+        "numbervolume": "Bitte gib eine Zahl zwischen 0 und 5 ein",
+        "bug": "Dieser Befehl ist aufgrund von Bugs derzeit auf bestimmte User limitiert",
+        "validsearch": "Bitte gib  ein Such Argument an",
+        "noreact": "Es ist keine Angabe erfolgt"
     },
-    "bot": {
-            
-    },
+    "bot": {},
     "help": {
-
+        "notdone": "`Folgt Noch`",
+        "user2": "Benutzer Hilfe",
+        "user1": "Staff Hilfe",
+        "staff1": "Moderation",
+        "staff2": "Administration",
+        "kick": "-kick <user>` - Kickt den Erwähnten User\n",
+        "userkat1": "fun",
+        "dice": "`-dice` - Wirft einen Würfel \n",
+        "react": "`-react` - Das Startet ein Spiel bei welchem ihr Reagieren müsst **WIP**\n",
+        "coin": "`-coin` - Wirft eine Münze \n",
+        "rickroll": "`-rr <user>` - rickrollt eure Freunde/Feinde\n",
+        "avatar": "`-avatar (<user>)` - Sendet euer Profilbild in dem channel\n",
+        "userkat2": "Music",
+        "play": "`-play <youtube Url>` - Spielt einen Youtube Song ab \n",
+        "search": "",
+        "loop": "`-loop <youtube link>` - Um das gewählte lied in dauerschleife spielen zu lassen\n",
+        "queue": "`-queue` - um die Warteschlange anzuzeigen\n",
+        "leave": "`-leave` - Beendet Die Wiedergabe und Verlässt den Channel \n",
+        "userkat3":"Informationen"
     },
     "minigames": {
         "dice": {
-            "ready" : "Auf die Plätze",
+            "ready": "Auf die Plätze",
             "steady": "Fertig ?",
             "go": "LOS!",
             "dice1": "Sie Haben eine 1 gewürfelt",
@@ -48,13 +62,13 @@
             "dice-message1": "Wow wie hast du das geschafft, du hast eine ",
             "dice-message2": ". gewürfelt, schreibe deinen erfolg Bitte ScarVite#6606 auf Discord"
         },
-        "coin" : {
+        "coin": {
             "front": "Sie Haben die Vorderseite Erwischt ",
             "back": "Sie Haben die Rückseite Erwischt "
         }
     },
     "troll": {
-        "mention" : "Du musst einen Benutzer erwähnen, damit dies funktioniert",
+        "mention": "Du musst einen Benutzer erwähnen, damit dies funktioniert",
         "self-mention": "Du hast dich selber,... Warte so funktuniert das nicht"
     },
     "fun": {
