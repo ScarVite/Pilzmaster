@@ -12,7 +12,7 @@ module.exports = {
                     locales.help.notdone, true)
                 .addBlankField()
                 .addField(locales.help.staff2, locales.help.notdone, true)
-                .setAuthor(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setFooter(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(helpembed)
         }
         else {
@@ -38,7 +38,7 @@ module.exports = {
                     , true)
                 .addBlankField()
                 .addField(locales.help.userkat3, locales.help.notdone, true)
-                .setAuthor(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
+                .setFooter(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(helpembed)
         }
     }

@@ -5,6 +5,7 @@ module.exports = {
 }
 const Discord = require('discord.js');
 var config = require('./config.json')
+var locales = require('./locales/' + config.lang + '.json')
 var rank = require('./functions/moderation/check_rank.js')
 var troll = require('./functions/fun/troll.js')
 var minigames = require('./functions/fun/minigames.js')
@@ -91,15 +92,10 @@ bot.on('message', function (message) {
                 music.streamyt(message, args[0]);
                 break;
             case 'leave':
-                if (message.guild.voiceConnection) {
-                    music.killstream(message)
-                }
-                else {
-                    message.reply('Wie soll ich einen Channel verlassen, wenn ich mit keinem verbunden bin')
-                }
+                music.killstream(message)
                 break;
             case 'author':
-                message.channel.send(" hey you, yeah you, i Was Made By ScarVite#6606")
+                message.channel.send(locales.bot.author)
                 break;
             case 'recomm-react':
                 message.channel.send("Now Reacting to every message")
@@ -131,7 +127,7 @@ bot.on('message', function (message) {
                 minigames.diceroll(message);
                 break;
             case 'meme':
-                message.channel.send("Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke ")
+                message.channel.send(locales.bot.meme)
                 break;
             case 'help':
                 help.help(message, Discord)
@@ -144,7 +140,6 @@ bot.on('message', function (message) {
                 //test.loopsong(message,'https://www.youtube.com/watch?v=1vrEljMfXYo')
                 break;
             case 'gefahr':
-                message.channel.send("Miau")
                 break;
             case 'avatar':
                 fun.getavatar(message, Discord)

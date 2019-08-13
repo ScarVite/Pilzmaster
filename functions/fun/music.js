@@ -26,6 +26,9 @@ var length = 0;
 var joined = false;
 
 function checkrightchannel(message, link, kill) {
+    if(kill===undefined){
+        kill = false
+    }
     if (message.member.voiceChannelID === '592389413296668722') {
         if (message.channel.id === '593398959427289108') {
             if (link !== link_cache) {
@@ -205,24 +208,29 @@ module.exports = {
         }
     },
     killstream: function (message) {
-        if (checkrightchannel(message, true) === true) {
-            if (joined === true) {
-                player.end()
-                queue = []
-                clearTimeout(distimeout)
-                clearTimeout(distimeout2)
-                message.guild.voiceConnection.disconnect();
-                message.channel.setTopic(locales.music.startsong)
-                joined = false
-                length = 0
-                link_cache = ''
-                length_cache = 0
-                looprunning = false
-                player.end()
+        if (message.guild.voiceConnection) {
+            if (checkrightchannel(message, true) === true) {
+                if (joined === true) {
+                    player.end()
+                    queue = []
+                    clearTimeout(distimeout)
+                    clearTimeout(distimeout2)
+                    message.guild.voiceConnection.disconnect();
+                    message.channel.setTopic(locales.music.startsong)
+                    joined = false
+                    length = 0
+                    link_cache = ''
+                    length_cache = 0
+                    looprunning = false
+                    player.end()
+                }
+                else {
+                    message.reply(locales.music.nothingplaying)
+                }
             }
-            else {
-                message.reply(locales.music.nothingplaying)
-            }
+        }
+        else {
+            message.reply(locales.music.notconnected)
         }
     },
     loopsong: function (message, link) {
