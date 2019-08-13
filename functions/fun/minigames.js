@@ -1,3 +1,6 @@
+var config = require('../../config.json')
+var locales = require('../../locales/' + config.lang + '.json')
+
 module.exports = {
     reaction: function (message) {
         var reacted = false

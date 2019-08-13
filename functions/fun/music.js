@@ -26,6 +26,9 @@ var length = 0;
 var joined = false;
 
 function checkrightchannel(message, link, kill) {
+    if(kill===undefined){
+        kill = false
+    }
     if (message.member.voiceChannelID === '592389413296668722') {
         if (message.channel.id === '593398959427289108') {
             if (link !== link_cache) {
