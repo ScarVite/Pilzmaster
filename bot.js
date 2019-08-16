@@ -24,7 +24,8 @@ const bot = new Discord.Client();
 bot.login(auth.token);
 
 bot.on('uncaughtException', function (exception) {
-    console.log(exception);
+    console.log(new Date().toString(),exception.stack || exception);
+    bot.exit(1);
 });
 
 bot.on('ready', function () {
