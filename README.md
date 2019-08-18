@@ -7,7 +7,7 @@ The Bot is in german because its used on an german server, the final version wil
 <h2>Documentation</h2>
 <h3>How to install</h3>
 We recommend to download the zip because everything works in the official releases. If you download the bot via git be awared that maybe not everything works.
-
+<br>
 
 **via zip**
 
