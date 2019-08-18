@@ -33,5 +33,8 @@ module.exports = {
                 message.member.removeRole(Pfifferling).catch(console.error);
             }
         }
+        else {
+            return
+        }
     }
 }

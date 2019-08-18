@@ -26,11 +26,11 @@ var length = 0;
 var joined = false;
 
 function checkrightchannel(message, link, kill) {
-    if(kill===undefined){
+    if (kill === undefined) {
         kill = false
     }
-    if (message.member.voiceChannelID === '592389413296668722') {
-        if (message.channel.id === '593398959427289108') {
+    if (message.member.voiceChannelID === config.voicechannel) {
+        if (message.channel.id === config.channel) {
             if (link !== link_cache) {
                 if (kill === false) {
                     if (validateYouTubeUrl(link) === true) {
@@ -204,7 +204,7 @@ module.exports = {
             message.channel.send(queueembed)
         }
         else {
-            message.channel.send(locales.emptywaitlist)
+            message.channel.send(locales.music.emptywaitlist)
         }
     },
     killstream: function (message) {
