@@ -1,15 +1,14 @@
 
+
 # The Bot
 ![greenkeeper](https://badges.greenkeeper.io/ScarVite/Pilzmaster.svg) ![dependencies](https://david-dm.org/ScarVite/Pilzmaster.svg) ![unstable](https://img.shields.io/badge/build-unstable-yellow) ![coverage](https://img.shields.io/badge/coverage-50%25-yellowgreen)
-
 The Bot is in german because its used on an german server, the final version will be in english tho. to install it do npm install in the dir with the package.json file This is An Discord Bot using Discord.js Owner : ScarVite#6606
 
-**Documentation**
+<h2>Documentation</h2>
 
 
-[TOC]
 
-##How to install
+<h3>How to install</h3>
 We recommend to download the zip because everything works in the official releases. If you download the bot via git be awared that maybe not everything works.
 
 **via zip**
@@ -27,7 +26,7 @@ https://github.com/ScarVite/Pilzmaster/releases
 **start the bot** 
 `$ npm run bot`
 
-##the config
+<h2>the config<h3>
 
 There are a few options you need to adjust before you can start the bot. 
 You need to edit the config file so the bot works probably.
