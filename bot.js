@@ -38,12 +38,12 @@ bot.on('ready', function () {
     })
     if (restarted === true) {
         console.log("Restart Succesfull")
-        bot.channels.get("593824605144088586").send("Restart Sucessfull")
+        bot.channels.get(config.consolechannel).send("Restart Sucessfull")
         restarted = false;
     }
     else {
         console.log('Startup Sucessfull');
-        bot.channels.get("593824605144088586").send("Startup Sucessfull")
+        bot.channels.get(config.consolechannel).send("Startup Sucessfull")
     }
     console.log('Connected as: ' + bot.user.tag);
     console.log('Current Language is ' + config.lang)
