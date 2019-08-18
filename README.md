@@ -25,7 +25,7 @@ https://github.com/ScarVite/Pilzmaster/releases
 
 `$ npm run bot`
 
-<h2>the config<h2>
+<h2>the config</h2>
 
 There are a few options you need to adjust before you can start the bot. 
 You need to edit the config file so the bot works probably.
