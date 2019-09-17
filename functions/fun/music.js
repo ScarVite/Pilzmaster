@@ -217,28 +217,35 @@ module.exports = {
     },
     killstream: function (message) {
         if (message.guild.voiceConnection) {
-            if (checkrightchannel(message, true) === true) {
+            if (checkrightchannel(message,'56', true) === true) {
                 if (joined === true) {
                     killplayer(message)
                 }
                 else {
-                    message.reply(locales.music.nothingplaying)
+                    if(arguments.callee.caller.name !== 'stop'){
+                        message.reply(locales.music.nothingplaying)
+                    }
+                    else{
+                        return
+                    }
                 }
             }
         }
         else {
-            message.reply(locales.music.notconnected)
+            if(arguments.callee.caller.name !== 'stop'){
+                message.reply(locales.music.notconnected)
+            }
         }
     },
-    skip: function(message){
-        if(/*Tiggy Dein einsatzt, reactions abfragen*/){
+    /*skip: function(message){
+        if(Tiggy Dein einsatzt, reactions abfragen){
             player.end()
             play(message)
         }
         else{
             message.channel.send(locales.irgendwas)
         }
-    },
+    }, */
     loopsong: function (message, link) {
         if (checkrightchannel(message, link) === true) {
             if (joined === false) {
