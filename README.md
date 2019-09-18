@@ -2,7 +2,7 @@
 
 # The Bot
 ![greenkeeper](https://badges.greenkeeper.io/ScarVite/Pilzmaster.svg) ![dependencies](https://david-dm.org/ScarVite/Pilzmaster.svg) ![unstable](https://img.shields.io/badge/build-unstable-yellow) ![coverage](https://img.shields.io/badge/coverage-50%25-yellowgreen)
-The Bot is in german because its used on an german server, the final version will be in english tho. to install it do npm install in the dir with the package.json file This is An Discord Bot using Discord.js Owner : ScarVite#6606
+The Bot is in german because its used on an german server, the final version will be in english.
 
 <h2>Documentation</h2>
 <h3>How to install</h3>
