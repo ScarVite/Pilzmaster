@@ -1,7 +1,7 @@
 
 
 # The Bot
-![greenkeeper](https://badges.greenkeeper.io/ScarVite/Pilzmaster.svg) ![dependencies](https://david-dm.org/ScarVite/Pilzmaster.svg) ![unstable](https://img.shields.io/badge/build-unstable-yellow) ![coverage](https://img.shields.io/badge/coverage-50%25-yellowgreen)
+![greenkeeper](https://badges.greenkeeper.io/ScarVite/Pilzmaster.svg) ![dependencies](https://david-dm.org/ScarVite/Pilzmaster.svg) ![unstable](https://img.shields.io/badge/build-unstable-yellow) ![coverage](https://img.shields.io/badge/coverage-50%25-yellowgreen) <br>
 The Bot is in german because its used on an german server, the final version will be in english.
 
 <h2>Documentation</h2>
