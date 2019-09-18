@@ -68,6 +68,9 @@ bot.on('message', function (message) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
+            case 'rpc':
+                minigames.rpc(message,args[0])
+                break;
             case 'search':
                 music.searchyt(message,args[0], args[1],args[2],args[3], Discord)
                 break;

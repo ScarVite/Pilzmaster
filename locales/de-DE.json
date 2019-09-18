@@ -70,6 +70,11 @@
         "coin": {
             "front": "Sie Haben die Vorderseite Erwischt ",
             "back": "Sie Haben die Rückseite Erwischt "
+        },
+        "rpc": {
+            "win": "Ich Gewinne",
+            "loose": "Du Gewinnst",
+            "draw": "Unentschieden"
         }
     },
     "troll": {

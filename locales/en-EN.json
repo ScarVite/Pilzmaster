@@ -1,4 +1,5 @@
 {
+    "request": "Angefordert von: ",
     "music": {
         "request": "Requested by",
         "validlink": "You need to provide an valid Youtube URL",
@@ -23,5 +24,63 @@
         "volume2": " ",
         "numbervolume": "Please provide an Number between 0 and 5",
         "bug": "This command currently is bugged and limited to some users only"
+        },
+    "bot": {
+        "meme":"Im not quite done with that function, i need more time",
+        "author":"Hey you, yeah you, i was coded by ScarVite#6606 and Tiggy#3633 "
+
+    },
+    "help": {
+        "notdone": "`to be added`",
+        "user2": "User Help",
+        "user1": "Staff Help",
+        "staff1": "Moderation",
+        "staff2": "Administration",
+        "kick": "-kick <user>` - kicks the mentioned user\n",
+        "userkat1": "fun",
+        "dice": "`-dice` - throws an dice \n",
+        "react": "`-react` - starts an game in which you have to react quickly **WIP**\n",
+        "coin": "`-coin` - throws an coin \n",
+        "rickroll": "`-rr <user>` - rickroll you friends/enemies\n",
+        "avatar": "`-avatar (<user>)` - Send your profilepic as an message\n",
+        "userkat2": "Music",
+        "play": "`-play <youtube Url>` - Starts an Youtube song \n",
+        "search": "",
+        "loop": "`-loop <youtube link>` - To loop the choosen song\n",
+        "queue": "`-queue` - to show the queue\n",
+        "leave": "`-leave` - stops the playback and leaves the channel \n",
+        "userkat3":"Informations"
+    },
+    "minigames": {
+        "dice": {
+            "ready": "ready",
+            "steady": "steady ?",
+            "go": "go!",
+            "dice1": "You threw a 1",
+            "dice2": "You threw a 2",
+            "dice3": "You threw a 3",
+            "dice4": "You threw a 4",
+            "dice5": "You threw a 5",
+            "dice6": "You threw a 6",
+            "dice-message1": "Wow, how did you throw a ",
+            "dice-message2": ". please message me, ScarVite#6606 on Discord, your achievement"
+        },
+        "coin": {
+            "front": "Its the Front ",
+            "back": "Its the Back "
+        },
+        "rpc": {
+            "win": "I Win",
+            "loose": "You Win",
+            "draw": "It's a Draw"
         }
+    },
+    "troll": {
+        "mention": "You need to mention an user",
+        "self-mention": "You played yourself,... wait that's not how that works",
+        "rr-link":"https://www.latlmes.com/breaking/this-revives-the-dead-1"
+    },
+    "fun": {
+        "profilepic": "The Profile pic of:  "
     }
+}

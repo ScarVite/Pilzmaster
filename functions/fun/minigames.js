@@ -1,6 +1,18 @@
 var config = require('../../config.json')
 var locales = require('../../locales/' + config.lang + '.json')
 
+function rpc(message, coice) {
+    if (choice === '1') {
+        message.channel.send('✂ - I win')
+    }
+    if (choice === '2') {
+        message.channel.send('✂ - I win')
+    }
+    if (choice === '3') {
+        message.channel.send('✂ - I win')
+    }
+}
+
 module.exports = {
     reaction: function (message) {
         var reacted = false
@@ -50,7 +62,7 @@ module.exports = {
                 })
                 break;
             default:
-                message.channel.send(locales.minigames.dice.dice-message1 + dice + locales.minigames.dice.dice-message1)
+                message.channel.send(locales.minigames.dice.dice - message1 + dice + locales.minigames.dice.dice - message1)
                 break;
         }
     },
@@ -67,6 +79,48 @@ module.exports = {
                     file: "https://i.ibb.co/qpwF24k/Uncirculated-Obverse-small.jpg"
                 })
                 break;
+        }
+    },
+    rpc: function (message, choice) {
+        let cpu = Math.floor(Math.random() * 3) + 1
+        console.log('cpu = ' + cpu )
+        // 1 = rock, 2 = paper, 3 = scissors
+        switch (choice) {
+            case 'r':
+                if (cpu === 1) {
+                    message.channel.send('🥌 - '+locales.minigames.rpc.draw)
+                }
+                if (cpu === 2) {
+                    message.channel.send('📰 - '+locales.minigames.rpc.win)
+                }
+                if (cpu === 3) {
+                    message.channel.send('✂ - '+locales.minigames.rpc.loose)
+                }
+                break;
+            case 'p':
+                if (cpu === 1) {
+                    message.channel.send('🥌 - '+locales.minigames.rpc.loose)
+                }
+                if (cpu === 2) {
+                    message.channel.send('📰 - '+locales.minigames.rpc.draw)
+                }
+                if (cpu === 3) {
+                    message.channel.send('✂ - '+locales.minigames.rpc.win)
+                }
+                break;
+            case 's':
+                if (cpu === 1) {
+                    message.channel.send('🥌 - '+ locales.minigames.rpc.win)
+                }
+                if (cpu === 2) {
+                    message.channel.send('📰 - '+ locales.minigames.rpc.loose)
+                }
+                if (cpu === 3) {
+                    message.channel.send('✂ - '+ locales.minigames.rpc.draw)
+                }
+                break;
+            default:
+                message.channel.send('Please use ')
         }
     }
 }
