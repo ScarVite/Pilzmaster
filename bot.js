@@ -4,7 +4,7 @@ module.exports = {
     }
 }
 const Discord = require('discord.js')
-const fetchreddit = require('random-puppy');
+const memeembed = new Discord.RichEmbed()
 var config = require('./config.json')
 var locales = require('./locales/' + config.lang + '.json')
 var rank = require('./functions/moderation/check_rank.js')
@@ -132,11 +132,7 @@ bot.on('message', function (message) {
                 minigames.diceroll(message);
                 break;
             case 'meme':
-                fetchreddit('memes').then(url =>{
-                    message.channel.send(locales.meme ,{
-                        file: url
-                    })
-                })
+                fun.memes(message,memeembed)
                 break;
             case 'help':
                 help.help(message, Discord)
@@ -145,7 +141,7 @@ bot.on('message', function (message) {
                 message.channel.send("What Else?")
                 break;
             case 'test':
-                //test.mujatest(message)
+                test(message,memeembed)
                 //test.loopsong(message,'https://www.youtube.com/watch?v=1vrEljMfXYo')
                 break;
             case 'gefahr':
