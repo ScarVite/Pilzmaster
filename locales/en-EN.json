@@ -26,7 +26,7 @@
         "bug": "This command currently is bugged and limited to some users only"
         },
     "bot": {
-        "meme":"Im not quite done with that function, i need more time",
+        "meme":"You wanted a juicy meme, here is one",
         "author":"Hey you, yeah you, i was coded by ScarVite#6606 and Tiggy#3633 "
 
     },
@@ -41,6 +41,7 @@
         "dice": "`-dice` - throws an dice \n",
         "react": "`-react` - starts an game in which you have to react quickly **WIP**\n",
         "coin": "`-coin` - throws an coin \n",
+        "rps": "`-rps [r/p/s] - to play rock(r) paper(p) sciccsors(s) against the bot` \n",
         "rickroll": "`-rr <user>` - rickroll you friends/enemies\n",
         "avatar": "`-avatar (<user>)` - Send your profilepic as an message\n",
         "userkat2": "Music",

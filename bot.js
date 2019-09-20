@@ -3,7 +3,8 @@ module.exports = {
         restarted = true
     }
 }
-const Discord = require('discord.js');
+const Discord = require('discord.js')
+const fetchreddit = require('random-puppy');
 var config = require('./config.json')
 var locales = require('./locales/' + config.lang + '.json')
 var rank = require('./functions/moderation/check_rank.js')
@@ -68,8 +69,8 @@ bot.on('message', function (message) {
         var cmd = precmd.toLowerCase()
         args = args.splice(1);
         switch (cmd) {
-            case 'rpc':
-                minigames.rpc(message,args[0])
+            case 'rps':
+                minigames.rps(message,args[0])
                 break;
             case 'search':
                 music.searchyt(message,args[0], args[1],args[2],args[3], Discord)
@@ -131,7 +132,11 @@ bot.on('message', function (message) {
                 minigames.diceroll(message);
                 break;
             case 'meme':
-                message.channel.send(locales.bot.meme)
+                fetchreddit('memes').then(url =>{
+                    message.channel.send(locales.meme ,{
+                        file: url
+                    })
+                })
                 break;
             case 'help':
                 help.help(message, Discord)

@@ -28,7 +28,7 @@
         "noreact": "Es ist keine Angabe erfolgt"
     },
     "bot": {
-        "meme":"Ich Bin noch nicht fertig, ich brauche mehr Zeit, danke",
+        "meme":"Du willst ein Saftiges meme, hier ist eins:",
         "author":"Hey du ja du, Ich wurde von ScarVite#6606 und Tiggy#3633 programmiert"
 
     },
@@ -43,6 +43,7 @@
         "dice": "`-dice` - Wirft einen Würfel \n",
         "react": "`-react` - Das Startet ein Spiel bei welchem ihr Reagieren müsst **WIP**\n",
         "coin": "`-coin` - Wirft eine Münze \n",
+        "rps": "`-rps [r/p/s] - Um Schere(s) stein(r) papier(p) gegen den bot zu spielen` \n",
         "rickroll": "`-rr <user>` - rickrollt eure Freunde/Feinde\n",
         "avatar": "`-avatar (<user>)` - Sendet euer Profilbild in dem channel\n",
         "userkat2": "Music",

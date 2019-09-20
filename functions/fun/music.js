@@ -18,7 +18,7 @@ var looprunning = false
 var length_cache = 0
 var looplength = 0
 let voiceconnection
-var link_cache
+var link_cache = " "
 var distimeout
 var distimeout2
 let player

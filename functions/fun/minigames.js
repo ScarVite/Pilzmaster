@@ -81,7 +81,7 @@ module.exports = {
                 break;
         }
     },
-    rpc: function (message, choice) {
+    rps: function (message, choice) {
         let cpu = Math.floor(Math.random() * 3) + 1
         console.log('cpu = ' + cpu )
         // 1 = rock, 2 = paper, 3 = scissors
