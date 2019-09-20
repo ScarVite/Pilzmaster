@@ -1,4 +1,3 @@
-const snekfetch = require('snekfetch');
 var config = require('../../config.json')
 var locales = require('../../locales/' + config.lang + '.json')
 
