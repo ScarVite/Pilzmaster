@@ -7,10 +7,10 @@
   "dependencies": {
     "bufferutil": "^4.0.1",
     "discord.js": "^11.5.0",
-    "ffmpeg": "0.0.4",
     "libsodium-wrappers": "^0.7.4",
     "math-round": "^1.0.0",
     "opusscript": "0.0.7",
+    "random-puppy": "^1.1.0",
     "uws": "^100.0.1",
     "youtube-search": "^1.1.4",
     "ytdl-core": "^0.29.5"
@@ -19,7 +19,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bot": "node bot.js"
-    
   },
   "license": "licensed by Scar"
 }

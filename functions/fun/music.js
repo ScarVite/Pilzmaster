@@ -17,8 +17,8 @@ var queue = []
 var looprunning = false
 var length_cache = 0
 var looplength = 0
-var link_cache
-var paused = false
+let voiceconnection
+var link_cache = " "
 var distimeout
 var distimeout2
 let player
@@ -97,10 +97,8 @@ function play(message) {
     length = (queue[0].duration * 1000)
     message.channel.setTopic(locales.music.nowplaying + queue[0].title + locales.music.length + sectomin(queue[0].duration))
     stream = ytdl(queue[0].url, { filter: (format) => ['45'], audioonly: true, highWaterMark: 1024 * 1024 * 50 });
-    message.member.voiceChannel.join().then(connection => {
-        player = connection.playStream(stream, streamOptions)
-        queue.shift()
-    }).catch(console.error);
+    player = voiceconnection.playStream(stream, streamOptions)
+    queue.shift()
     vlength(message, false)
 }
 
@@ -112,12 +110,7 @@ function disconnect(message) {
         else {
             if (message.guild.voiceConnection !== null) {
                 message.channel.send(locales.music.songend)
-                message.guild.voiceConnection.disconnect();
-                message.channel.setTopic(locales.music.startsong)
-                joined = false
-                length = 0
-                player.end()
-                queue = []
+                killplayer(message)
             }
         }
     }, length)
@@ -139,14 +132,28 @@ function sectomin(time) {
 function playloop(message, link) {
     looprunning = true
     const stream = ytdl(link, { filter: (format) => ['45'], audioonly: true, highWaterMark: 1024 * 1024 * 50 });
-    message.member.voiceChannel.join().then(connection => {
-        player = connection.playStream(stream, streamOptions)
-    }).catch(console.error);
+    player = voiceconnection.playStream(stream, streamOptions)
     distimeout2 = setTimeout(() => {
         if (looprunning === true) {
             playloop(message, link)
         }
     }, looplength);
+}
+
+function killplayer (message){
+    player.end()
+    queue = []
+    clearTimeout(distimeout)
+    clearTimeout(distimeout2)
+    message.guild.voiceConnection.disconnect();
+    message.channel.setTopic(locales.music.startsong)
+    joined = false
+    length = 0
+    link_cache = ''
+    voiceconnection = ''
+    length_cache = 0
+    looprunning = false
+    player.end()
 }
 
 module.exports = {
@@ -167,9 +174,10 @@ module.exports = {
                     streamOptions = { seek: 0, volume: 1 };
                 }
                 const stream = ytdl(queue[0].url, { filter: (format) => ['45'], audioonly: true, highWaterMark: 1024 * 1024 * 50 });
-                vlength(message, false)
                 message.member.voiceChannel.join().then(connection => {
                     player = connection.playStream(stream, streamOptions)
+                    voiceconnection = connection
+                    vlength(message, false)
                 }).catch(console.error);
                 queue.shift()
             }
@@ -209,30 +217,35 @@ module.exports = {
     },
     killstream: function (message) {
         if (message.guild.voiceConnection) {
-            if (checkrightchannel(message, true) === true) {
+            if (checkrightchannel(message,'56', true) === true) {
                 if (joined === true) {
-                    player.end()
-                    queue = []
-                    clearTimeout(distimeout)
-                    clearTimeout(distimeout2)
-                    message.guild.voiceConnection.disconnect();
-                    message.channel.setTopic(locales.music.startsong)
-                    joined = false
-                    length = 0
-                    link_cache = ''
-                    length_cache = 0
-                    looprunning = false
-                    player.end()
+                    killplayer(message)
                 }
                 else {
-                    message.reply(locales.music.nothingplaying)
+                    if(arguments.callee.caller.name !== 'stop'){
+                        message.reply(locales.music.nothingplaying)
+                    }
+                    else{
+                        return
+                    }
                 }
             }
         }
         else {
-            message.reply(locales.music.notconnected)
+            if(arguments.callee.caller.name !== 'stop'){
+                message.reply(locales.music.notconnected)
+            }
         }
     },
+    /*skip: function(message){
+        if(Tiggy Dein einsatzt, reactions abfragen){
+            player.end()
+            play(message)
+        }
+        else{
+            message.channel.send(locales.irgendwas)
+        }
+    }, */
     loopsong: function (message, link) {
         if (checkrightchannel(message, link) === true) {
             if (joined === false) {
@@ -245,7 +258,11 @@ module.exports = {
                     streamOptions = { seek: 0, volume: 1 };
                 }
                 joined = true
-                vlength(message, true, link)
+                message.member.voiceChannel.join().then(connection => {
+                    player = connection.playStream(stream, streamOptions)
+                    vlength(message, true, link)
+                    voiceconnection = connection
+                }).catch(console.error);
             }
             else {
                 message.reply(locales.music.waitloop)
@@ -253,18 +270,16 @@ module.exports = {
         }
     },
     pause: function (message) {
-        if (joined === true || loo) {
+        if (player.paused === false) {
             player.pause()
-            paused = true
         }
         else {
             message.reply(locales.music.nothingtopause)
         }
     },
     resume: function (message) {
-        if (paused === true) {
+        if (player.paused === true) {
             player.resume()
-            paused = false
         }
         else {
             message.reply(locales.music.nothingtoresume)

@@ -26,6 +26,7 @@ module.exports = {
                     locales.help.coin +
                     locales.help.rickroll +
                     locales.help.avatar +
+                    locales.help.rps + 
                     locales.help.notdone
                     , true)
                 .addBlankField()
@@ -37,7 +38,9 @@ module.exports = {
                     locales.help.notdone
                     , true)
                 .addBlankField()
-                .addField(locales.help.userkat3, locales.help.notdone, true)
+                .addField(locales.help.userkat3,
+                    locales.bot.meme +
+                    locales.help.notdone, true)
                 .setFooter(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(helpembed)
         }
