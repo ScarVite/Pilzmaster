@@ -16,7 +16,7 @@ var reactions = require("./functions/administration/reactions.js")
 var core = require("./functions/administration/core.js")
 var auth = require('./auth/auth.json');
 var music = require('./functions/fun/music.js')
-var test = require("./functions/test.js")
+//var test = require("./functions/test.js")
 var help = require('./functions/help.js')
 var round = require('math-round');
 const prefix = "-";
@@ -141,7 +141,7 @@ bot.on('message', function (message) {
                 message.channel.send("What Else?")
                 break;
             case 'test':
-                test.meme(message,memeembed)
+                //test.meme(message,memeembed)
                 //test.loopsong(message,'https://www.youtube.com/watch?v=1vrEljMfXYo')
                 break;
             case 'gefahr':

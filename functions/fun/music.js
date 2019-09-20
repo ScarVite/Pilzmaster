@@ -140,13 +140,15 @@ function playloop(message, link) {
     }, looplength);
 }
 
-function killplayer (message){
+function killplayer(message) {
     player.end()
     queue = []
     clearTimeout(distimeout)
     clearTimeout(distimeout2)
     message.guild.voiceConnection.disconnect();
-    message.channel.setTopic(locales.music.startsong)
+    if (message.channel.id === config.channel) {
+        message.channel.setTopic(locales.music.startsong)
+    }
     joined = false
     length = 0
     link_cache = ''
@@ -217,22 +219,22 @@ module.exports = {
     },
     killstream: function (message) {
         if (message.guild.voiceConnection) {
-            if (checkrightchannel(message,'56', true) === true) {
+            if (checkrightchannel(message, '56', true) === true) {
                 if (joined === true) {
                     killplayer(message)
                 }
                 else {
-                    if(arguments.callee.caller.name !== 'stop'){
+                    if (arguments.callee.caller.name !== 'stop') {
                         message.reply(locales.music.nothingplaying)
                     }
-                    else{
+                    else {
                         return
                     }
                 }
             }
         }
         else {
-            if(arguments.callee.caller.name !== 'stop'){
+            if (arguments.callee.caller.name !== 'stop') {
                 message.reply(locales.music.notconnected)
             }
         }
