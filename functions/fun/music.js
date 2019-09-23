@@ -61,7 +61,7 @@ function validateYouTubeUrl(link) {
     if (link !== undefined && link !== '' && link !== null) {
         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
         var match = link.match(regExp);
-        if (match && match[2].length == 11) {
+        if (match && match[2].length === 11) {
             return (true)
         }
         else {
@@ -74,7 +74,7 @@ function validateYouTubeUrl(link) {
 }
 
 function vlength(message, loop, link) {
-    if (loop == false) {
+    if (loop === false) {
         if (length === length_cache) {
             setTimeout(function () { vlength(message, false) }, 200);
         }
@@ -160,7 +160,7 @@ function killplayer(message) {
 
 module.exports = {
     streamyt: function (message, link) {
-        if (checkrightchannel(message, link) == true) {
+        if (checkrightchannel(message, link) === true) {
             link_cache = link
             var obj = { url: link, title: '', duration: '', gathered: false }
             queue.push(obj)

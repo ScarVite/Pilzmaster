@@ -1,6 +1,6 @@
 module.exports = {
     changerestarted: function () {
-        restarted = true
+        restarted = true;
     }
 }
 const Discord = require('discord.js')
@@ -13,7 +13,7 @@ var minigames = require('./functions/fun/minigames.js')
 var fun = require('./functions/fun/fun.js')
 var mod = require("./functions/moderation/mod.js")
 var reactions = require("./functions/administration/reactions.js")
-var core = require("./functions/administration/core.js")
+var core = require("./functions/administration/core.js");
 var auth = require('./auth/auth.json');
 var music = require('./functions/fun/music.js')
 //var test = require("./functions/test.js")
@@ -57,8 +57,8 @@ bot.on('message', function (message) {
             stop(message);
         }
         else {
-            if (message.author.id != 582254580331577353) {
-
+            if (message.author.id !== 582254580331577353) {
+                return;
             }
         }
     }

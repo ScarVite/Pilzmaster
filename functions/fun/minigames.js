@@ -3,6 +3,7 @@ var locales = require('../../locales/' + config.lang + '.json')
 
 async function rpsvs(message,challanger,challanged){
     message.channel.send(challanger + 'it´s your turn, write me in the dms with either 1 = rock 2 = paper 3 = scissors')
+    await challanger
 }
 
 function rpsplayer(message) {
