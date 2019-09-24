@@ -21,7 +21,7 @@ jobs:
       run: |
         npm install
         npm run build --if-present
-        console.log('it works')
+        console.log("it works")
         return(true)
       env:
         CI: true
