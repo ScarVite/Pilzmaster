@@ -4,8 +4,8 @@ module.exports = {
     }
 }
 const Discord = require('discord.js')
-const memeembed = new Discord.RichEmbed()
 var config = require('./config.json')
+const bot = new Discord.Client();
 var locales = require('./locales/' + config.lang + '.json')
 var rank = require('./functions/moderation/check_rank.js')
 var troll = require('./functions/fun/troll.js')
@@ -21,7 +21,7 @@ var help = require('./functions/help.js')
 var round = require('math-round');
 const prefix = "-";
 var restarted = false;
-const bot = new Discord.Client();
+var memeembed = new Discord.RichEmbed()
 bot.login(auth.token);
 
 bot.on('uncaughtException', function (exception) {
@@ -53,6 +53,7 @@ bot.on('ready', function () {
 bot.on('message', function (message) {
     rank.check_role(message);
     if (message.guild === null) {
+        if(message.content)
         if (message.content === '-stop') {
             stop(message);
         }

@@ -1,16 +1,27 @@
 var config = require('../../config.json')
 var locales = require('../../locales/' + config.lang + '.json')
-var url
 const fetch = require("node-fetch");
 
 
 
-async function getimg(message) {
+async function getimg(message,memeembed) {
     const dankjson = await getjson(URL)
-    message.channel.send(locales.bot.meme,{
-        file: dankjson["0"]["data"]["children"]["0"]["data"]["url"]
-    })
+    if(dankjson["0"]["data"]["children"]["0"]["data"]["score"] <1000){
+        dankjson = ''
+        dankjson = await getjson(URL)
+        console.log('here')
+        getimg(message,memeembed)
+    }
+    else{
+        memeembed
+        .setTitle(dankjson["0"]["data"]["children"]["0"]["data"]["title"])
+        .setURL('https://reddit.com' + dankjson["0"]["data"]["children"]["0"]["data"]["permalink"])
+        .setImage(dankjson["0"]["data"]["children"]["0"]["data"]["url"])
+        .setFooter('👍 ' + dankjson["0"]["data"]["children"]["0"]["data"]["score"]  )
+    message.channel.send(memeembed)
+    }
 }
+
 
 async function getjson(url) {
     var url = 'https://reddit.com/r/dankmemes/random.json'
@@ -33,6 +44,6 @@ module.exports = {
         }
     },
     memes:function(message, memeembed){
-        getimg(message)
+        getimg(message,memeembed)
     }
 }

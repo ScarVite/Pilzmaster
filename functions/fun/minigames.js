@@ -1,14 +1,31 @@
 var config = require('../../config.json')
 var locales = require('../../locales/' + config.lang + '.json')
+var challanger
+var challanged
+var turn1 
+var turn2 
+var turn3 
+var turn4
+var turn5 
 
-async function rpsvs(message,challanger,challanged){
+async function hasanswered(message){
+    while(answered){
+        if(message.guild === null){
+            if(message.member.id === challanger.id){
+
+            }
+        }
+    }
+}
+
+async function rpsvs(message,){
     message.channel.send(challanger + 'it´s your turn, write me in the dms with either 1 = rock 2 = paper 3 = scissors')
-    await challanger
+    await hasanswered(message, true) === true
 }
 
 function rpsplayer(message) {
-    var challanger = message.member
-    var challanged = message.mentions.users.first()
+    challanger = message.member
+    challanged = message.mentions.users.first()
     message.channel.send(message.member + ' has challanged you to an game of rock paper scissors, do you accept?' + message.mentions.users.first()).then(message => {
         message.react('✅')
         message.react('❌')
@@ -18,7 +35,7 @@ function rpsplayer(message) {
         message.awaitReactions(searchft, { max: 1, time: 15000 }).then(collected => {
             if (collected.first().emoji.name == '✅') {
                 message.channel.send('You accepted')
-                rpsvs(message,challanger,challanged)
+                rpsvs(message)
             }
             else {
                 if (collected.first().emoji.name == '❌') {
