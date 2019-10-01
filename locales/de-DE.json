@@ -28,6 +28,7 @@
         "noreact": "Es ist keine Angabe erfolgt"
     },
     "bot": {
+        "server":"Dieser befehl funktuniert nur auf einem Server",
         "meme":"Du willst ein Saftiges meme, hier ist eins:",
         "author":"Hey du ja du, Ich wurde von ScarVite#6606 und Tiggy#3633 programmiert"
 

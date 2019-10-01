@@ -26,6 +26,7 @@
         "bug": "This command currently is bugged and limited to some users only"
         },
     "bot": {
+        "server":"This Command only works on an Server",
         "meme":"You wanted a juicy meme, here is one",
         "author":"Hey you, yeah you, i was coded by ScarVite#6606 and Tiggy#3633 "
 

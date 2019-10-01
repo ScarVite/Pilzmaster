@@ -5,11 +5,10 @@ const fetch = require("node-fetch");
 
 
 async function getimg(message,memeembed) {
-    const dankjson = await getjson(URL)
+    var dankjson = await getjson(URL)
     if(dankjson["0"]["data"]["children"]["0"]["data"]["score"] <1000){
         dankjson = ''
         dankjson = await getjson(URL)
-        console.log('here')
         getimg(message,memeembed)
     }
     else{

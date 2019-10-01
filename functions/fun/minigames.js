@@ -12,7 +12,7 @@ async function hasanswered(message){
     while(answered){
         if(message.guild === null){
             if(message.member.id === challanger.id){
-
+                
             }
         }
     }
