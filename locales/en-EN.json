@@ -26,6 +26,7 @@
         "bug": "This command currently is bugged and limited to some users only"
         },
     "bot": {
+        "server":"This Command only works on an Server",
         "meme":"You wanted a juicy meme, here is one",
         "author":"Hey you, yeah you, i was coded by ScarVite#6606 and Tiggy#3633 "
 
@@ -44,6 +45,7 @@
         "rps": "`-rps [r/p/s] - to play rock(r) paper(p) sciccsors(s) against the bot` \n",
         "rickroll": "`-rr <user>` - rickroll you friends/enemies\n",
         "avatar": "`-avatar (<user>)` - Send your profilepic as an message\n",
+        "meme": "`-meme` - To Send an random meme from r/Dankmemes \n",
         "userkat2": "Music",
         "play": "`-play <youtube Url>` - Starts an Youtube song \n",
         "search": "",
@@ -70,10 +72,11 @@
             "front": "Its the Front ",
             "back": "Its the Back "
         },
-        "rpc": {
+        "rps": {
             "win": "I Win",
             "loose": "You Win",
-            "draw": "It's a Draw"
+            "draw": "It's a Draw",
+            "choose":"You must choose between Rock(r) paper(p) or scissors(s)"
         }
     },
     "troll": {

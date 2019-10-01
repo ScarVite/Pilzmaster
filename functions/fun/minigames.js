@@ -1,16 +1,54 @@
 var config = require('../../config.json')
 var locales = require('../../locales/' + config.lang + '.json')
+var challanger
+var challanged
+var turn1 
+var turn2 
+var turn3 
+var turn4
+var turn5 
 
-function rpc(message, coice) {
-    if (choice === '1') {
-        message.channel.send('✂ - I win')
+async function hasanswered(message){
+    while(answered){
+        if(message.guild === null){
+            if(message.member.id === challanger.id){
+                
+            }
+        }
     }
-    if (choice === '2') {
-        message.channel.send('✂ - I win')
-    }
-    if (choice === '3') {
-        message.channel.send('✂ - I win')
-    }
+}
+
+async function rpsvs(message,){
+    message.channel.send(challanger + 'it´s your turn, write me in the dms with either 1 = rock 2 = paper 3 = scissors')
+    await hasanswered(message, true) === true
+}
+
+function rpsplayer(message) {
+    challanger = message.member
+    challanged = message.mentions.users.first()
+    message.channel.send(message.member + ' has challanged you to an game of rock paper scissors, do you accept?' + message.mentions.users.first()).then(message => {
+        message.react('✅')
+        message.react('❌')
+        const searchft = (reaction, user) => {
+            return ['✅', '❌'].includes(reaction.emoji.name) && user.id == message.mentions.users.first().id;
+        };
+        message.awaitReactions(searchft, { max: 1, time: 15000 }).then(collected => {
+            if (collected.first().emoji.name == '✅') {
+                message.channel.send('You accepted')
+                rpsvs(message)
+            }
+            else {
+                if (collected.first().emoji.name == '❌') {
+                    message.channel.send(message.member + ' I´m sorry ' + message.mentions.users.first() + ' didn´t accept your duel')
+                }
+                else {
+
+                }
+            }
+        }).catch(collected => {
+            message.reply(message.mentions.users.first() + ' didn´t reply in time')
+        })
+    })
 }
 
 module.exports = {
@@ -82,45 +120,49 @@ module.exports = {
         }
     },
     rps: function (message, choice) {
-        let cpu = Math.floor(Math.random() * 3) + 1
-        console.log('cpu = ' + cpu )
-        // 1 = rock, 2 = paper, 3 = scissors
-        switch (choice) {
-            case 'r':
-                if (cpu === 1) {
-                    message.channel.send('🥌 - '+locales.minigames.rpc.draw)
-                }
-                if (cpu === 2) {
-                    message.channel.send('📰 - '+locales.minigames.rpc.win)
-                }
-                if (cpu === 3) {
-                    message.channel.send('✂ - '+locales.minigames.rpc.loose)
-                }
-                break;
-            case 'p':
-                if (cpu === 1) {
-                    message.channel.send('🥌 - '+locales.minigames.rpc.loose)
-                }
-                if (cpu === 2) {
-                    message.channel.send('📰 - '+locales.minigames.rpc.draw)
-                }
-                if (cpu === 3) {
-                    message.channel.send('✂ - '+locales.minigames.rpc.win)
-                }
-                break;
-            case 's':
-                if (cpu === 1) {
-                    message.channel.send('🥌 - '+ locales.minigames.rpc.win)
-                }
-                if (cpu === 2) {
-                    message.channel.send('📰 - '+ locales.minigames.rpc.loose)
-                }
-                if (cpu === 3) {
-                    message.channel.send('✂ - '+ locales.minigames.rpc.draw)
-                }
-                break;
-            default:
-                message.channel.send('Please use ')
+        if (message.mentions.users.first() == undefined) {
+            let cpu = Math.floor(Math.random() * 3) + 1
+            // 1 = rock, 2 = paper, 3 = scissors
+            switch (choice) {
+                case 'r':
+                    if (cpu === 1) {
+                        message.channel.send('🥌 - ' + locales.minigames.rps.draw)
+                    }
+                    if (cpu === 2) {
+                        message.channel.send('📰 - ' + locales.minigames.rps.win)
+                    }
+                    if (cpu === 3) {
+                        message.channel.send('✂ - ' + locales.minigames.rps.loose)
+                    }
+                    break;
+                case 'p':
+                    if (cpu === 1) {
+                        message.channel.send('🥌 - ' + locales.minigames.rps.loose)
+                    }
+                    if (cpu === 2) {
+                        message.channel.send('📰 - ' + locales.minigames.rps.draw)
+                    }
+                    if (cpu === 3) {
+                        message.channel.send('✂ - ' + locales.minigames.rps.win)
+                    }
+                    break;
+                case 's':
+                    if (cpu === 1) {
+                        message.channel.send('🥌 - ' + locales.minigames.rps.win)
+                    }
+                    if (cpu === 2) {
+                        message.channel.send('📰 - ' + locales.minigames.rps.loose)
+                    }
+                    if (cpu === 3) {
+                        message.channel.send('✂ - ' + locales.minigames.rps.draw)
+                    }
+                    break;
+                default:
+                    message.channel.send(locales.minigames.rps.choose)
+            }
+        }
+        else {
+            rpsplayer(message)
         }
     }
 }

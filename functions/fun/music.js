@@ -61,7 +61,7 @@ function validateYouTubeUrl(link) {
     if (link !== undefined && link !== '' && link !== null) {
         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
         var match = link.match(regExp);
-        if (match && match[2].length == 11) {
+        if (match && match[2].length === 11) {
             return (true)
         }
         else {
@@ -74,7 +74,7 @@ function validateYouTubeUrl(link) {
 }
 
 function vlength(message, loop, link) {
-    if (loop == false) {
+    if (loop === false) {
         if (length === length_cache) {
             setTimeout(function () { vlength(message, false) }, 200);
         }
@@ -140,13 +140,15 @@ function playloop(message, link) {
     }, looplength);
 }
 
-function killplayer (message){
+function killplayer(message) {
     player.end()
     queue = []
     clearTimeout(distimeout)
     clearTimeout(distimeout2)
     message.guild.voiceConnection.disconnect();
-    message.channel.setTopic(locales.music.startsong)
+    if (message.channel.id === config.channel) {
+        message.channel.setTopic(locales.music.startsong)
+    }
     joined = false
     length = 0
     link_cache = ''
@@ -158,7 +160,7 @@ function killplayer (message){
 
 module.exports = {
     streamyt: function (message, link) {
-        if (checkrightchannel(message, link) == true) {
+        if (checkrightchannel(message, link) === true) {
             link_cache = link
             var obj = { url: link, title: '', duration: '', gathered: false }
             queue.push(obj)
@@ -217,22 +219,22 @@ module.exports = {
     },
     killstream: function (message) {
         if (message.guild.voiceConnection) {
-            if (checkrightchannel(message,'56', true) === true) {
+            if (checkrightchannel(message, '56', true) === true) {
                 if (joined === true) {
                     killplayer(message)
                 }
                 else {
-                    if(arguments.callee.caller.name !== 'stop'){
+                    if (arguments.callee.caller.name !== 'stop') {
                         message.reply(locales.music.nothingplaying)
                     }
-                    else{
+                    else {
                         return
                     }
                 }
             }
         }
         else {
-            if(arguments.callee.caller.name !== 'stop'){
+            if (arguments.callee.caller.name !== 'stop') {
                 message.reply(locales.music.notconnected)
             }
         }

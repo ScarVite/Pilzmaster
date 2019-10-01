@@ -39,7 +39,7 @@ module.exports = {
                     , true)
                 .addBlankField()
                 .addField(locales.help.userkat3,
-                    locales.bot.meme +
+                    locales.help.meme +
                     locales.help.notdone, true)
                 .setFooter(locales.request + message.author.tag, message.author.avatarURL, 'https://scarvite.6te.net')
             message.channel.send(helpembed)

@@ -1,5 +1,32 @@
 var config = require('../../config.json')
 var locales = require('../../locales/' + config.lang + '.json')
+const fetch = require("node-fetch");
+
+
+
+async function getimg(message,memeembed) {
+    var dankjson = await getjson(URL)
+    if(dankjson["0"]["data"]["children"]["0"]["data"]["score"] <1000){
+        dankjson = ''
+        dankjson = await getjson(URL)
+        getimg(message,memeembed)
+    }
+    else{
+        memeembed
+        .setTitle(dankjson["0"]["data"]["children"]["0"]["data"]["title"])
+        .setURL('https://reddit.com' + dankjson["0"]["data"]["children"]["0"]["data"]["permalink"])
+        .setImage(dankjson["0"]["data"]["children"]["0"]["data"]["url"])
+        .setFooter('👍 ' + dankjson["0"]["data"]["children"]["0"]["data"]["score"]  )
+    message.channel.send(memeembed)
+    }
+}
+
+
+async function getjson(url) {
+    var url = 'https://reddit.com/r/dankmemes/random.json'
+    const response = await fetch(url);
+    return response.json()
+}
 
 module.exports = {
     getavatar: function (message, Discord) {
@@ -16,29 +43,6 @@ module.exports = {
         }
     },
     memes:function(message, memeembed){
-        console.log('here')
-        snekfetch.get('https://www.reddit.com/r/dankmemes/random.json')
-        message.channel.send()
-        /*exports.run = async (message, args,memeembed) => {
-            try {
-                console.log('here2')
-                const { body } = await snekfetch
-                    .get('https://www.reddit.com/r/dankmemes.json?sort=top&t=week')
-                    .query({ limit: 800 });
-                const allowed = message.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
-                if (!allowed.length) return message.channel.send('It seems we are out of fresh memes!, Try again later.');
-                const randomnumber = Math.floor(Math.random() * allowed.length)
-                memeembed
-                .setColor(0x00A2E8)
-                .setTitle(allowed[randomnumber].data.title)
-                .setDescription("Posted by: " + allowed[randomnumber].data.author)
-                .setImage(allowed[randomnumber].data.url)
-                .addField("Other info:", "Up votes: " + allowed[randomnumber].data.ups + " / Comments: " + allowed[randomnumber].data.num_comments)
-                .setFooter("Memes provided by r/dankmemes")
-                message.channel.send(embed)
-            } catch (err) {
-                return console.log(err);
-            }
-        }*/
+        getimg(message,memeembed)
     }
 }
