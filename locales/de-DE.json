@@ -30,8 +30,10 @@
     "bot": {
         "server":"Dieser befehl funktuniert nur auf einem Server",
         "meme":"Du willst ein Saftiges meme, hier ist eins:",
-        "author":"Hey du ja du, Ich wurde von ScarVite#6606 und Tiggy#3633 programmiert"
-
+        "author":"Hey du ja du, Ich wurde von ScarVite#6606 und Tiggy#3633 programmiert",
+        "pet1":", Du Wurdest von ",
+        "pet2":" gepattet. <:kannaPat:593904715666817025>",
+        "mention":"Du musst einen Benutzer erwähnen, damit dies funktioniert"
     },
     "help": {
         "notdone": "`Folgt Noch`",
@@ -84,7 +86,7 @@
     "troll": {
         "mention": "Du musst einen Benutzer erwähnen, damit dies funktioniert",
         "self-mention": "Du hast dich selber,... Warte so funktuniert das nicht",
-        "rr-link":"https://www.latlmes.com/breaking/dieser-trick-bringt-waifus-in-die-echte-welt-1"
+        "rrlink":"https://www.latlmes.com/breaking/dieser-trick-bringt-waifus-in-die-echte-welt-1"
     },
     "fun": {
         "profilepic": "Das Profilbild von "
