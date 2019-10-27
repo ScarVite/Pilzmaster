@@ -28,8 +28,10 @@
     "bot": {
         "server":"This Command only works on an Server",
         "meme":"You wanted a juicy meme, here is one",
-        "author":"Hey you, yeah you, i was coded by ScarVite#6606 and Tiggy#3633 "
-
+        "author":"Hey you, yeah you, i was coded by ScarVite#6606 and Tiggy#3633 ",
+        "pet1":", You have been patted by ",
+        "pet2":" . <:kannaPat:593904715666817025>",
+        "mention":"You need to mention an user"
     },
     "help": {
         "notdone": "`to be added`",
@@ -65,8 +67,8 @@
             "dice4": "You threw a 4",
             "dice5": "You threw a 5",
             "dice6": "You threw a 6",
-            "dice-message1": "Wow, how did you throw a ",
-            "dice-message2": ". please message me, ScarVite#6606 on Discord, your achievement"
+            "dicemessage1": "Wow, how did you throw a ",
+            "dicemessage2": ". please message me, ScarVite#6606 on Discord, your achievement"
         },
         "coin": {
             "front": "Its the Front ",
@@ -81,8 +83,8 @@
     },
     "troll": {
         "mention": "You need to mention an user",
-        "self-mention": "You played yourself,... wait that's not how that works",
-        "rr-link":"https://www.latlmes.com/breaking/this-revives-the-dead-1"
+        "selfmention": "You played yourself,... wait that's not how that works",
+        "rrlink":"https://www.latlmes.com/breaking/this-revives-the-dead-1"
     },
     "fun": {
         "profilepic": "The Profile pic of:  "

@@ -5,10 +5,10 @@ const fetch = require("node-fetch");
 
 
 async function getimg(message,memeembed) {
-    var dankjson = await getjson(URL)
+    var dankjson = await getjson()
     if(dankjson["0"]["data"]["children"]["0"]["data"]["score"] <1000){
         dankjson = ''
-        dankjson = await getjson(URL)
+        dankjson = await getjson()
         getimg(message,memeembed)
     }
     else{
@@ -22,7 +22,7 @@ async function getimg(message,memeembed) {
 }
 
 
-async function getjson(url) {
+async function getjson() {
     var url = 'https://reddit.com/r/dankmemes/random.json'
     const response = await fetch(url);
     return response.json()

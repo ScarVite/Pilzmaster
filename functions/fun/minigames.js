@@ -100,7 +100,7 @@ module.exports = {
                 })
                 break;
             default:
-                message.channel.send(locales.minigames.dice.dice - message1 + dice + locales.minigames.dice.dice - message1)
+                message.channel.send(locales.minigames.dice.dicemessage1 + dice + locales.minigames.dice.dicemessage2)
                 break;
         }
     },
