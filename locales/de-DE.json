@@ -13,7 +13,7 @@
         "songend": "Das Lied ist Vorbei",
         "startsong": "Starte einen song mit -play <youtube link>",
         "addwaitlist": " wurde der Warteschlang hinzugefügt.",
-        "waitlist": "Derzeitige Warteschlange",
+        "waitlist": "Derzeitige Warteschlange:",
         "emptywaitlist": "Die Warteschlange ist derzeit leer,\n starte ein lied mit -play <youtube url>",
         "loop": " als dauerschleife.",
         "waitloop": "Warte zuerst bis die derzeitige Warteschlange/der Loop durchgeloffen ist oder nutze -leave",
