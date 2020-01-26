@@ -13,7 +13,7 @@
         "songend": "Das Lied ist Vorbei",
         "startsong": "Starte einen song mit -play <youtube link>",
         "addwaitlist": " wurde der Warteschlang hinzugefügt.",
-        "waitlist": "Derzeitige Warteschlange",
+        "waitlist": "Derzeitige Warteschlange:",
         "emptywaitlist": "Die Warteschlange ist derzeit leer,\n starte ein lied mit -play <youtube url>",
         "loop": " als dauerschleife.",
         "waitloop": "Warte zuerst bis die derzeitige Warteschlange/der Loop durchgeloffen ist oder nutze -leave",
@@ -30,8 +30,10 @@
     "bot": {
         "server":"Dieser befehl funktuniert nur auf einem Server",
         "meme":"Du willst ein Saftiges meme, hier ist eins:",
-        "author":"Hey du ja du, Ich wurde von ScarVite#6606 und Tiggy#3633 programmiert"
-
+        "author":"Hey du ja du, Ich wurde von ScarVite#6606 und Tiggy#3633 programmiert",
+        "pet1":", Du Wurdest von ",
+        "pet2":" gepattet. <:kannaPat:593904715666817025>",
+        "mention":"Du musst einen Benutzer erwähnen, damit dies funktioniert"
     },
     "help": {
         "notdone": "`Folgt Noch`",
@@ -67,8 +69,8 @@
             "dice4": "Sie Haben eine 4 gewürfelt",
             "dice5": "Sie Haben eine 5 gewürfelt",
             "dice6": "Sie Haben eine 6 gewürfelt",
-            "dice-message1": "Wow wie hast du das geschafft, du hast eine ",
-            "dice-message2": ". gewürfelt, schreibe deinen erfolg Bitte ScarVite#6606 auf Discord"
+            "dicemessage1": "Wow wie hast du das geschafft, du hast eine ",
+            "dicemessage2": ". gewürfelt, schreibe deinen erfolg Bitte ScarVite#6606 auf Discord"
         },
         "coin": {
             "front": "Sie Haben die Vorderseite Erwischt ",
@@ -83,8 +85,8 @@
     },
     "troll": {
         "mention": "Du musst einen Benutzer erwähnen, damit dies funktioniert",
-        "self-mention": "Du hast dich selber,... Warte so funktuniert das nicht",
-        "rr-link":"https://www.latlmes.com/breaking/dieser-trick-bringt-waifus-in-die-echte-welt-1"
+        "selfmention": "Du hast dich selber,... Warte so funktuniert das nicht",
+        "rrlink":"https://www.latlmes.com/breaking/dieser-trick-bringt-waifus-in-die-echte-welt-1"
     },
     "fun": {
         "profilepic": "Das Profilbild von "
