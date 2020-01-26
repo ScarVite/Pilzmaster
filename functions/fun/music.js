@@ -202,7 +202,7 @@ module.exports = {
             const queueembed = new Discord.RichEmbed();
             queueembed
                 .setColor('#735BC1')
-                .setTitle(locales.waitlist)
+                .setTitle(locales.music.waitlist)
             for (var i = 0; i < queue.length; i++) {
                 if (queue[i] !== undefined) {
                     queueembed

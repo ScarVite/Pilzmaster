@@ -3,25 +3,26 @@ module.exports = {
         restarted = true;
     }
 }
-const Discord = require('discord.js')
-var config = require('./config.json')
+const Discord = require('discord.js');
+var config = require('./config.json');
 const bot = new Discord.Client();
-var locales = require('./locales/' + config.lang + '.json')
-var rank = require('./functions/moderation/check_rank.js')
-var troll = require('./functions/fun/troll.js')
-var minigames = require('./functions/fun/minigames.js')
-var fun = require('./functions/fun/fun.js')
-var mod = require("./functions/moderation/mod.js")
-var reactions = require("./functions/administration/reactions.js")
+var locales = require('./locales/' + config.lang + '.json');
+var rank = require('./functions/moderation/check_rank.js');
+var troll = require('./functions/fun/troll.js');
+var minigames = require('./functions/fun/minigames.js');
+var fun = require('./functions/fun/fun.js');
+var mod = require("./functions/moderation/mod.js");
+var reactions = require("./functions/administration/reactions.js");
+var admin = require("./functions/administration/admin.js");
 var core = require("./functions/administration/core.js");
 var auth = require('./auth/auth.json');
 var music = require('./functions/fun/music.js')
-//var test = require("./functions/test.js")
-var help = require('./functions/help.js')
+//var test = require("./functions/test.js");
+var help = require('./functions/help.js');
 var round = require('math-round');
 const prefix = "-";
 var restarted = false;
-var memeembed = new Discord.RichEmbed()
+var memeembed = new Discord.RichEmbed();
 bot.login(auth.token);
 
 bot.on('uncaughtException', function (exception) {
@@ -121,6 +122,9 @@ bot.on('message', function (message) {
                 case 'kick':
                     mod.kick(message)
                     break;
+                case 'ban':
+                    admin.ban(message)
+                    break;
                 case 'problem':
                     message.reply(" https://i.ibb.co/gvTzN2S/vu409zuiqhg21.jpg")
                     break;
@@ -130,6 +134,9 @@ bot.on('message', function (message) {
                     break;
                 case 'rr':
                     troll.rickroll(message)
+                    break;
+                case 'hm':
+                    minigames.hangman(message);
                     break;
                 case 'react':
                     minigames.reaction(message)

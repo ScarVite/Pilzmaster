@@ -1,3 +1,5 @@
+
+
 # The Bot
 ![greenkeeper](https://badges.greenkeeper.io/ScarVite/Pilzmaster.svg) ![dependencies](https://david-dm.org/ScarVite/Pilzmaster.svg) ![unstable](https://img.shields.io/badge/build-unstable-yellow) ![coverage](https://img.shields.io/badge/coverage-50%25-yellowgreen) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5a5701d787d149d2a55c08d048fa9599)](https://www.codacy.com/manual/ScarVite/Pilzmaster?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ScarVite/Pilzmaster&amp;utm_campaign=Badge_Grade) <br>
 
