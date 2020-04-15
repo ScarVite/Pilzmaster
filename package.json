@@ -13,7 +13,7 @@
     "opusscript": "0.0.7",
     "uws": "^100.0.1",
     "youtube-search": "^1.1.4",
-    "ytdl-core": "^1.0.7"
+    "ytdl-core": "^2.1.0"
   },
   "devDependencies": {},
   "scripts": {
