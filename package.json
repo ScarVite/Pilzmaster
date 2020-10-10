@@ -9,7 +9,7 @@
     "discord.js": "^11.5.1",
     "libsodium-wrappers": "^0.7.6",
     "math-round": "^1.0.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "opusscript": "0.0.7",
     "uws": "^100.0.1",
     "youtube-search": "^1.1.4",
